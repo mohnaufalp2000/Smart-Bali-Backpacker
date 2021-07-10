@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.smart.smartbalibackpaker.databinding.ActivitySplashBinding
+import com.smart.smartbalibackpaker.onboarding.OnboardingActivity
+import com.smart.smartbalibackpaker.onboarding.OnboardingOneFragment
 
 class SplashActivity : AppCompatActivity() {
 
@@ -15,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(mainLooper).postDelayed({
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, OnboardingActivity::class.java))
             finishAffinity()
         }, 2000)
     }

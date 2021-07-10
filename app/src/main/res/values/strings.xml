@@ -5,4 +5,15 @@
     <string name="search">Search</string>
     <string name="chat">Chat</string>
     <string name="settings">Settings</string>
+    <string name="plan_the_best">Plan The Best</string>
+    <string name="the_best_choice_is_depend_on_yours">The best choice is depend on yours</string>
+    <string name="skip">SKIP</string>
+    <string name="onboarding_page_one_content">onboarding page one</string>
+    <string name="build_a_relationship">Build a Relationship</string>
+    <string name="onboarding_page_two_content">onboarding page two</string>
+    <string name="got_the_finest_moment_while_travelling">Got the finest moment while travelling</string>
+    <string name="onboarding_last_page_content">onboarding last page</string>
+    <string name="enjoy_traveling">Enjoy Traveling</string>
+    <string name="a_lot_of_memories_that_never_forgotten">A lot of memories that never forgotten</string>
+    <string name="get_started">Get Started</string>
 </resources>
