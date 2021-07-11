@@ -1,8 +1,10 @@
 package com.smart.smartbalibackpaker.onboarding
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.smart.smartbalibackpaker.R
+import com.smart.smartbalibackpaker.auth.LoginActivity
 import com.smart.smartbalibackpaker.databinding.ActivityOnboardingBinding
 
 class OnboardingActivity : AppCompatActivity() {
@@ -14,5 +16,9 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.vpOnboarding.adapter = OnboardingAdapter(supportFragmentManager)
+        binding.btnIn.setOnClickListener {
+            startActivity(Intent(this@OnboardingActivity, LoginActivity::class.java))
+            finish()
+        }
     }
 }

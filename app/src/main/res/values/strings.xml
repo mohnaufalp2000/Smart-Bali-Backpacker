@@ -16,4 +16,17 @@
     <string name="enjoy_traveling">Enjoy Traveling</string>
     <string name="a_lot_of_memories_that_never_forgotten">A lot of memories that never forgotten</string>
     <string name="get_started">Get Started</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_account">Don\'t Have Account?</string>
+    <string name="register_now"><u>Register Now</u></string>
+    <string name="image_temple_content">image temple</string>
+    <string name="smart_bali_backpacker">Smart Bali-Backpacker</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_account">Already have account?</string>
 </resources>
