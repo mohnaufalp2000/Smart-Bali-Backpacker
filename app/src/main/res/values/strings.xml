@@ -29,4 +29,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="already_have_account">Already have account?</string>
+    <string name="login_now"><u>Login Now</u></string>
 </resources>
