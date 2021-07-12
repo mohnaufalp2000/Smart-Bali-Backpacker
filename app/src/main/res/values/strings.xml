@@ -30,4 +30,10 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="already_have_account">Already have account?</string>
     <string name="login_now"><u>Login Now</u></string>
+    <string name="tab_allplace">All</string>
+    <string name="tab_touristplace">Tourist Place</string>
+    <string name="tab_hotelvilla">Hotel &amp; Villa</string>
+    <string name="tab_worshipplace">Worship Place</string>
+
+
 </resources>

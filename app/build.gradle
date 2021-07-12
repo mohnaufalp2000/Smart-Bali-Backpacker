@@ -52,4 +52,7 @@ dependencies {
     // Page Indicator for onboarding
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 
+    //Dashboard Popular Image auto-slide
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
 }

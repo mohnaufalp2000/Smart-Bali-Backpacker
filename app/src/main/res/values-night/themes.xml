@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/bg_primary_dark</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/txt_middle</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

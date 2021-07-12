@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartBaliBackpaker">
-        <activity android:name=".auth.SignUpActivity"></activity>
+        <activity android:name=".auth.SignUpActivity" />
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".onboarding.OnboardingActivity" />
         <activity android:name=".SplashActivity">
