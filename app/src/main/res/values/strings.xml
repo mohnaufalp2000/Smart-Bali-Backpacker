@@ -34,6 +34,12 @@
     <string name="tab_touristplace">Tourist Place</string>
     <string name="tab_hotelvilla">Hotel &amp; Villa</string>
     <string name="tab_worshipplace">Worship Place</string>
-
-
+    <string name="key_edit_profile">key_edit_profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="key_notifications">key_notifications</string>
+    <string name="notifications">Notifications</string>
+    <string name="key_edit_languages">key_edit_languages</string>
+    <string name="languages">Languages</string>
+    <string name="change_profile_photo">Change Profile Photo</string>
+    <string name="image_profile_content">Image Profile</string>
 </resources>

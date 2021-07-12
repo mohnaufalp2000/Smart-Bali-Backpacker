@@ -30,24 +30,23 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
         return binding?.root
 //        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val dashboardPlaceAdapter = activity?.let { DashboardPlaceAdapter(it) }
-        binding?.apply {
-            viewPager.adapter = dashboardPlaceAdapter
+
+            binding?.vpDashboard?.adapter = dashboardPlaceAdapter
             TabLayoutMediator(
-                layoutTabLayout,
-                viewPager
+                binding?.layoutTabLayout!!,
+                binding?.vpDashboard!!
             ) { tab, position ->
                 tab.text = resources.getString(TAB_TITLES[position])
             }.attach()
-        }
+
 
         val imageList = ArrayList<SlideModel>() // Create image list
 
