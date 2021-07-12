@@ -24,4 +24,9 @@
     <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="">
         <item name="colorPrimary">@color/white</item>
     </style>
+
+    <style name="SettingsFragmentStyle">
+        <item name="android:textColor">#FFFFFF</item>...
+    </style>
+
 </resources>

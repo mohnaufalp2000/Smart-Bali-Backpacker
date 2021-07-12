@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="settings_preferences"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        android:key="@string/key_edit_profile"
+        android:title="@string/edit_profile"
+        android:icon="@drawable/profile"
+        app:iconSpaceReserved="false"
+        app:allowDividerBelow="true"
+        />
+
+    <SwitchPreference
+        android:key="@string/key_notifications"
+        android:title="@string/notifications"
+        android:singleLine="true"
+        android:icon="@drawable/notifications"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true"
+        />
+
+    <Preference
+        android:key="@string/key_edit_languages"
+        android:title="@string/languages"
+        android:icon="@drawable/languages"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="false"/>
+
+</PreferenceScreen>
