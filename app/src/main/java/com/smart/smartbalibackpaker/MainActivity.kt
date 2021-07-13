@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTheme(R.style.SettingsFragmentStyle)
 
         val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
         navView.itemIconTintList = null

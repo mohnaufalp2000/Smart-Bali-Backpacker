@@ -7,18 +7,35 @@
     android:background="@drawable/bg_main"
     tools:context=".auth.LoginActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:elevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/smart_bali_backpacker"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appbar_sign_up"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
@@ -149,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="82dp"
-                android:background="@drawable/bg_btn_get_started"
+                android:background="@drawable/bg_btn_yellow"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/sign_up"
                 android:textColor="@color/white" />

@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="82dp"
-                android:background="@drawable/bg_btn_get_started"
+                android:background="@drawable/bg_btn_yellow"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/sign_in"
                 android:textColor="@color/white" />
