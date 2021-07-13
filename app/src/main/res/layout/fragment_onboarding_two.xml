@@ -26,6 +26,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="@string/build_a_relationship"
         android:textColor="@color/white"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
