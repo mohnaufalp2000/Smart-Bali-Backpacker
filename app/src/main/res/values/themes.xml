@@ -31,4 +31,10 @@
         <item name="android:textColor">#FFFFFF</item>...
     </style>
 
+    <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>
