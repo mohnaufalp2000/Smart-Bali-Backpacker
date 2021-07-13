@@ -76,8 +76,6 @@ class DashboardFragment : Fragment() {
         val imageSlider = binding?.imageSlider
         imageSlider?.setImageList(imageList)
 
-
-
     }
 
 }

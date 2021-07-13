@@ -20,5 +20,16 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
             finishAffinity()
         }
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.tbSignUp)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.tbSignUp.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+        binding.tbSignUp.setNavigationOnClickListener {
+            finish()
+        }
     }
 }

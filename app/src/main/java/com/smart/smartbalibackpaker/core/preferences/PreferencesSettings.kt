@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
+import com.smart.smartbalibackpaker.EditProfileActivity
 import com.smart.smartbalibackpaker.R
 
 
@@ -37,7 +38,7 @@ class PreferencesSettings : PreferenceFragmentCompat() {
         editProfile = resources.getString(R.string.key_edit_profile)
         editProfilePreferences = findPreference<Preference>(editProfile) as Preference
         editProfilePreferences.setOnPreferenceClickListener {
-            Toast.makeText(context, "EDIT PROFILE", Toast.LENGTH_LONG).show()
+            startActivity(Intent(context, EditProfileActivity::class.java))
             true
         }
     }

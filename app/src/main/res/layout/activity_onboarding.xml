@@ -46,7 +46,7 @@
             android:id="@+id/btn_in"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/bg_btn_get_started"
+            android:background="@drawable/bg_btn_yellow"
             android:fontFamily="@font/poppins"
             android:text="@string/get_started"
             android:textColor="@color/white"

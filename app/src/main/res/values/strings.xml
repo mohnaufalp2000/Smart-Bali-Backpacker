@@ -42,4 +42,6 @@
     <string name="languages">Languages</string>
     <string name="change_profile_photo">Change Profile Photo</string>
     <string name="image_profile_content">Image Profile</string>
+    <string name="update_my_profile">Update My Profile</string>
+    <string name="change_password">Change Password</string>
 </resources>
