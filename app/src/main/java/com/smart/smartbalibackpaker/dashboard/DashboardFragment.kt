@@ -60,11 +60,21 @@ class DashboardFragment : Fragment() {
                     val image = ds.child("image").value
 
                     binding?.tvWelcomeUsername?.text = "Welcome $username"
-                    context?.let {
-                        Glide.with(it)
-                            .load(image)
-                            .apply(RequestOptions().override(55, 55))
-                            .into(binding!!.ivWelcomePhoto)
+
+                    if (image == ""){
+                        context?.let {
+                            Glide.with(it)
+                                .load(R.drawable.account)
+                                .apply(RequestOptions().override(55, 55))
+                                .into(binding!!.ivWelcomePhoto)
+                        }
+                    } else {
+                        context?.let {
+                            Glide.with(it)
+                                .load(image)
+                                .apply(RequestOptions().override(55, 55))
+                                .into(binding!!.ivWelcomePhoto)
+                        }
                     }
                 }
             }

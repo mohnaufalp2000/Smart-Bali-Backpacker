@@ -55,10 +55,18 @@ class SettingFragment : Fragment() {
                     val email = ds.child("email").value
                     val image = ds.child("image").value
 
-                    context?.let {
-                        Glide.with(it)
-                            .load(image)
-                            .into(binding!!.imgViewProfile)
+                    if (image == ""){
+                        context?.let {
+                            Glide.with(it)
+                                .load(R.drawable.account)
+                                .into(binding!!.imgViewProfile)
+                        }
+                    } else {
+                        context?.let {
+                            Glide.with(it)
+                                .load(image)
+                                .into(binding!!.imgViewProfile)
+                        }
                     }
 
                     binding?.txtViewEmail?.text = email.toString().trim()
@@ -68,7 +76,6 @@ class SettingFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, "Error Unknown Object", Toast.LENGTH_LONG).show()
             }
         })
 

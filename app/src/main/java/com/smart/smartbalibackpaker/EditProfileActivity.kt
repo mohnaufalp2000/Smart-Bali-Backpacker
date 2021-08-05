@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,9 +16,14 @@ import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.smart.smartbalibackpaker.auth.AddPhotoActivity
 import com.smart.smartbalibackpaker.databinding.ActivityEditProfileBinding
+import java.util.*
+import kotlin.collections.HashMap
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -25,13 +31,18 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var dialog: AlertDialog
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
-    private lateinit var user: FirebaseUser
+    private var user: FirebaseUser? = null
     private lateinit var dbReference: DatabaseReference
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageRef: StorageReference
     private var userId: String? = null
     private lateinit var imageUri : Uri
     private lateinit var bitmap: Bitmap
     private lateinit var removeBtn : ImageView
     private lateinit var removeTxt : TextView
+    private var usernameDB = ""
+    private var imageDB : Any? = null
+    var img = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,20 +51,29 @@ class EditProfileActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseDatabase.getInstance()
         dbReference = db.getReference("users")
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.getReference()
         userId = auth.currentUser?.uid
+        user = auth.currentUser
 
-        val query = dbReference.orderByChild("email").equalTo(user.email)
+        val query = dbReference.orderByChild("email").equalTo(user?.email)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(ds in snapshot.children){
-                    val username = ""+ ds.child("username").value
-                    val image = ds.child("image").value
+                    usernameDB = ""+ ds.child("username").value
+                    imageDB = ds.child("image").value
 
-                    binding.etUsername.setText(username)
+                    binding.etUsername.setText(usernameDB)
 
-                    Glide.with(applicationContext)
-                        .load(image)
-                        .into(binding.imgPhoto)
+                    if (imageDB == ""){
+                        Glide.with(applicationContext)
+                            .load(R.drawable.account)
+                            .into(binding.imgPhoto)
+                    } else {
+                        Glide.with(applicationContext)
+                            .load(imageDB)
+                            .into(binding.imgPhoto)
+                    }
                 }
             }
 
@@ -73,7 +93,46 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         binding.btnUpdateProfile.setOnClickListener {
+            if (binding.imgPhoto.drawable.constantState?.equals(resources.getDrawable(R.drawable.account).constantState) == true){
+                removeBtn.visibility = View.GONE
+                removeTxt.visibility = View.GONE
+                binding.imgPhoto.setImageResource(R.drawable.account)
+            }
 
+            val imgUri : Uri? = when{
+                ::imageUri.isInitialized -> imageUri
+                else -> null
+            }
+
+            val ref = storageRef.child("images/${UUID.randomUUID()}")
+            if (imgUri != null) {
+                ref.putFile(imgUri)
+                    .addOnSuccessListener{
+                        ref.downloadUrl.addOnSuccessListener {
+                            img = it.toString()
+                        }
+                    }
+            }
+
+            val username = binding.etUsername.text.toString()
+            if (username == usernameDB){
+                Toast.makeText(this, "Please Insert Your New Data", Toast.LENGTH_LONG).show()
+            } else {
+                val user : HashMap<String, Any> = HashMap()
+
+                user.put("username", username)
+                user.put("image", img)
+
+
+                auth.currentUser?.uid.let { id ->
+                    if (id != null) {
+                        dbReference.child(id).updateChildren(user)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Succesful update data", Toast.LENGTH_LONG).show()
+                            }
+                    }
+                }
+            }
         }
     }
 
@@ -82,7 +141,6 @@ class EditProfileActivity : AppCompatActivity() {
         when {
             requestCode == AddPhotoActivity.REQUEST_TAKE_PICTURE && resultCode == RESULT_OK -> {
                 bitmap = data?.extras?.get("data") as Bitmap
-                imageUri = data.data!!
 
                 binding.imgPhoto.setImageBitmap(bitmap)
                 removeBtn.visibility = View.VISIBLE
