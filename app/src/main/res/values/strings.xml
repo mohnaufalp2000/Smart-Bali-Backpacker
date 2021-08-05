@@ -45,4 +45,14 @@
     <string name="update_my_profile">Update My Profile</string>
     <string name="change_password">Change Password</string>
     <string name="search_here">Search here</string>
+    <string name="key_log_out">key_log_out</string>
+    <string name="logout">Log Out</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="new_password">New Password</string>
+    <string name="add_profile_photo">Add Profile Photo</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="pick_from_gallery">Pick From Gallery</string>
+    <string name="remove_picture">Remove Picture</string>
+    <string name="choose">Choose</string>
+    <string name="save_and_sign_up">Save and Sign Up</string>
 </resources>

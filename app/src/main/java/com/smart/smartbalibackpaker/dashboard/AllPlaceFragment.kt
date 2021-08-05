@@ -23,7 +23,6 @@ class AllPlaceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.sampleTv?.text = "This is AllPlaces Fragment"
     }
 
 }

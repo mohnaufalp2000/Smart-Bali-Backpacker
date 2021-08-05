@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smart.smartbalibackpaker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartBaliBackpaker">
-        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".auth.AddPhotoActivity">
+
+        </activity>
+        <activity android:name=".ChangePassActivity" />
+        <activity android:name=".DetailActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".auth.SignUpActivity" />
         <activity android:name=".auth.LoginActivity" />
