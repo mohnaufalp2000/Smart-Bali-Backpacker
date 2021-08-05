@@ -33,6 +33,7 @@ class PreferencesSettings : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, "settings_preferences")
+        //TODO --> HALOO TEST
         setupEditProfile()
         setupNotifications()
         setupLanguages()

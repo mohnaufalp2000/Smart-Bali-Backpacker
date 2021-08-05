@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_stream_chat"
-        android:name="com.smart.smartbalibackpaker.StreamChatFragment"
+        android:name="com.smart.smartbalibackpaker.chat.StreamChatFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_stream_chat" />
 

@@ -96,7 +96,7 @@ class AddPhotoActivity : AppCompatActivity() {
             requestCode == REQUEST_TAKE_PICTURE && resultCode == RESULT_OK -> {
                 statusAdd = true
                 bitmap = data?.extras?.get("data") as Bitmap
-                imageUri = data.data
+                imageUri = getImageUriFromBitmap(bitmap)
 
                 binding.imgPhoto.setImageBitmap(bitmap)
                 binding.btnAddPhoto.visibility = View.VISIBLE
@@ -117,6 +117,18 @@ class AddPhotoActivity : AppCompatActivity() {
         }
     }
 
+    private fun getImageUriFromBitmap(bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, bytes)
+        val resolver = applicationContext.contentResolver
+        val path = MediaStore.Images.Media.insertImage(
+            resolver,
+            bitmap,
+            System.currentTimeMillis().toString(),
+            null
+        )
+        return Uri.parse(path.toString())
+    }
 
     private fun registerUser(email: String, password: String, username: String, image: String) {
         auth.createUserWithEmailAndPassword(email, password)
@@ -188,7 +200,7 @@ class AddPhotoActivity : AppCompatActivity() {
             removeBtn.visibility = View.GONE
             removeTxt.visibility = View.GONE
             binding.btnAddPhoto.visibility = View.GONE
-            binding.txtAddPhoto.text = "Add User Photo"
+            binding.txtAddPhoto.text = "Add DataUser Photo"
         }
 
         cameraBtn.setOnClickListener {

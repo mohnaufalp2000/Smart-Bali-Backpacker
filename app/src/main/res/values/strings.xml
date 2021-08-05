@@ -34,6 +34,8 @@
     <string name="tab_touristplace">Tourist Place</string>
     <string name="tab_hotelvilla">Hotel &amp; Villa</string>
     <string name="tab_worshipplace">Worship Place</string>
+    <string name="tab_personalchat">Personal</string>
+    <string name="tab_grupchat">Group</string>
     <string name="key_edit_profile">key_edit_profile</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="key_notifications">key_notifications</string>

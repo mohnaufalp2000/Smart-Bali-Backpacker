@@ -68,7 +68,7 @@ class SettingFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, error.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Error Unknown Object", Toast.LENGTH_LONG).show()
             }
         })
 
