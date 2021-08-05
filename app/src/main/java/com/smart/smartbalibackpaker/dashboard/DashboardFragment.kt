@@ -6,16 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.StringRes
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.DetailActivity
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseDatabase
+    private lateinit var user: FirebaseUser
+    private lateinit var dbReference: DatabaseReference
+    private var userId: String? = null
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
 
@@ -34,6 +45,34 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
+
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseDatabase.getInstance()
+        dbReference = db.getReference("users")
+        user = auth.currentUser!!
+        userId = auth.currentUser?.uid
+
+        val query = dbReference.orderByChild("email").equalTo(user.email)
+        query.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(ds in snapshot.children){
+                    val username = ""+ ds.child("username").value
+                    val image = ds.child("image").value
+
+                    binding?.tvWelcomeUsername?.text = "Welcome $username"
+                    context?.let {
+                        Glide.with(it)
+                            .load(image)
+                            .apply(RequestOptions().override(55, 55))
+                            .into(binding!!.ivWelcomePhoto)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
         return binding?.root
 //        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }

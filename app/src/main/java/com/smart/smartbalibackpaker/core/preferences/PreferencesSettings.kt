@@ -12,6 +12,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.smart.smartbalibackpaker.EditProfileActivity
 import com.smart.smartbalibackpaker.R
+import com.smart.smartbalibackpaker.auth.LoginActivity
 
 
 class PreferencesSettings : PreferenceFragmentCompat() {
@@ -19,9 +20,11 @@ class PreferencesSettings : PreferenceFragmentCompat() {
     private lateinit var editProfilePreferences: Preference
     private lateinit var notificationsPreferences: SwitchPreference
     private lateinit var languagesPreferences: Preference
+    private lateinit var logoutProferences: Preference
     private lateinit var editProfile: String
     private lateinit var notifications: String
     private lateinit var languages: String
+
 
     override fun setDivider(divider: Drawable?) {
         super.setDivider(divider)
@@ -34,6 +37,7 @@ class PreferencesSettings : PreferenceFragmentCompat() {
         setupNotifications()
         setupLanguages()
     }
+
 
     private fun setupEditProfile() {
         editProfile = resources.getString(R.string.key_edit_profile)
