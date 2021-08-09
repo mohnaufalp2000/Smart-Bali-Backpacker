@@ -20,10 +20,12 @@ class PreferencesSettings : PreferenceFragmentCompat() {
     private lateinit var editProfilePreferences: Preference
     private lateinit var notificationsPreferences: SwitchPreference
     private lateinit var languagesPreferences: Preference
+    private lateinit var darkModePreferences: SwitchPreference
     private lateinit var logoutProferences: Preference
     private lateinit var editProfile: String
     private lateinit var notifications: String
     private lateinit var languages: String
+    private lateinit var darkMode: String
 
 
     override fun setDivider(divider: Drawable?) {
@@ -37,6 +39,19 @@ class PreferencesSettings : PreferenceFragmentCompat() {
         setupEditProfile()
         setupNotifications()
         setupLanguages()
+        setupDarkMode()
+    }
+
+    private fun setupDarkMode() {
+        darkMode = resources.getString(R.string.key_dark_mode)
+        darkModePreferences = findPreference<SwitchPreference>(darkMode) as SwitchPreference
+
+        darkModePreferences.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener{_,_ ->
+                darkModePreferences.isChecked = !darkModePreferences.isChecked
+
+                true
+            }
     }
 
 

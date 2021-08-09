@@ -57,4 +57,5 @@
     <string name="remove_picture">Remove Picture</string>
     <string name="choose">Choose</string>
     <string name="save_and_sign_up">Save and Sign Up</string>
+    <string name="key_dark_mode">key_dark_mode</string>
 </resources>
