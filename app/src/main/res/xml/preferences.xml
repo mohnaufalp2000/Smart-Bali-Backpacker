@@ -20,6 +20,15 @@
         app:allowDividerBelow="true"
         />
 
+    <SwitchPreference
+        android:key="@string/key_dark_mode"
+        app:title="Dark Mode"
+        android:singleLine="true"
+        android:icon="@drawable/darkmode"
+        app:allowDividerAbove="true"
+        app:allowDividerBelow="true"
+        />
+
     <Preference
         android:key="@string/key_edit_languages"
         android:title="@string/languages"
