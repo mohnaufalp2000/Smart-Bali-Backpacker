@@ -59,7 +59,6 @@ class AddPhotoActivity : AppCompatActivity() {
         val userIntent = intent.getParcelableExtra<User>(USER)
 
         binding.txtUsername.text = "Welcome, ${userIntent?.username}"
-//        binding.txtUsername.text = "Welcome, Naufal"
 
         binding.imgAddProfile.setOnClickListener {
             if (statusAdd){
@@ -81,10 +80,7 @@ class AddPhotoActivity : AppCompatActivity() {
         }
 
         binding.btnSkip.setOnClickListener {
-            Intent(this@AddPhotoActivity, MainActivity::class.java).also { intent ->
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
+            registerUser(userIntent?.email ?: "", userIntent?.password ?: "", userIntent?.username ?: "", "")
         }
 
         setupToolbar()
@@ -146,6 +142,8 @@ class AddPhotoActivity : AppCompatActivity() {
                         put("email", email)
                         put("username", username)
                         put("image", image)
+                        put("onlineState", "online")
+                        put("onTypingState", "noOne")
                     }
 
                     val reference = db.getReference("users")

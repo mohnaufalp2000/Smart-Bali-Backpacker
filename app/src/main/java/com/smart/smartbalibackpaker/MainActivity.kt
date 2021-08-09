@@ -7,17 +7,34 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.smart.smartbalibackpaker.databinding.ActivityChatBinding
 import com.smart.smartbalibackpaker.databinding.ActivityMainBinding
+import com.smart.smartbalibackpaker.model.ChatAdapter
+import com.smart.smartbalibackpaker.model.ModelChat
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private var user: FirebaseUser? = null
+    private lateinit var dbReference: DatabaseReference
+    private var myUid: String? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setTheme(R.style.SettingsFragmentStyle)
+
+        user = FirebaseAuth.getInstance().currentUser
+        myUid = user?.uid
 
         val navView: BottomNavigationView = findViewById(R.id.bottom_nav_view)
         navView.itemIconTintList = null
@@ -27,4 +44,5 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         navView.drawableState
     }
+
 }

@@ -1,7 +1,6 @@
 package com.smart.smartbalibackpaker.chat
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentPersonalChatBinding
 import com.smart.smartbalibackpaker.databinding.FragmentStreamChatBinding
 import com.smart.smartbalibackpaker.model.DataUser
+import com.smart.smartbalibackpaker.model.ChatAdapter
 import com.smart.smartbalibackpaker.model.UserAdapter
 
 class PersonalChatFragment : Fragment() {
@@ -29,6 +29,40 @@ class PersonalChatFragment : Fragment() {
     private lateinit var dbReference: DatabaseReference
 
     private var listUser = ArrayList<DataUser>()
+
+    private var myUid: String? = null
+    private var hashMap: HashMap<String, Any> = HashMap()
+
+
+    override fun onStart() {
+        checkOnlineState("online")
+        super.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        checkOnlineState(System.currentTimeMillis().toString())
+
+    }
+
+    override fun onResume() {
+        checkOnlineState("online")
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        checkOnlineState(System.currentTimeMillis().toString())
+        super.onDestroy()
+    }
+
+    private fun checkOnlineState(onlineState: String) {
+        myUid = FirebaseAuth.getInstance().currentUser?.uid
+        dbReference = FirebaseDatabase.getInstance().getReference("users").child(myUid.toString())
+
+        hashMap.put("onlineState", onlineState)
+        dbReference.updateChildren(hashMap)
+
+    }
 
 
     override fun onCreateView(
@@ -46,18 +80,9 @@ class PersonalChatFragment : Fragment() {
         return binding?.root
     }
 
-
-    private fun showRecycler(){
-        binding?.rvChatPersonal?.apply {
-
-            adapter = adapter
-
-        }
-    }
-
     private fun getUser() {
         user = FirebaseAuth.getInstance().currentUser
-        dbReference = FirebaseDatabase.getInstance().getReference("users")
+        dbReference = FirebaseDatabase.getInstance().reference.child("users")
 
         dbReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -65,17 +90,21 @@ class PersonalChatFragment : Fragment() {
                 for (ds in snapshot.children) {
                     val dataUser = ds.getValue(DataUser::class.java)
 
-                    if (!dataUser?.uid.equals(user?.uid)) {
+                    if (!dataUser?.id.equals(user?.uid)) {
                         if (dataUser != null) {
-                            listUser.add(dataUser)
-
+                            val data = DataUser(
+                                dataUser.id,
+                                dataUser.username,
+                                dataUser.email,
+                                dataUser.image
+                            )
+                            listUser.add(data)
                         }
                     }
-                    adapter = context?.let { UserAdapter(listUser) }!!
+                    adapter = context?.let { UserAdapter(it, listUser) }!!
                     binding?.rvChatPersonal?.adapter = adapter
-
-
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {

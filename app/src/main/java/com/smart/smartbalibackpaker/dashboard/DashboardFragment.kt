@@ -1,7 +1,12 @@
 package com.smart.smartbalibackpaker.dashboard
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +24,7 @@ import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.DetailActivity
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentDashboardBinding
+import com.smart.smartbalibackpaker.utils.OnlineChecker
 
 class DashboardFragment : Fragment() {
 
@@ -30,6 +36,11 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
 
+    private var myUid: String? = null
+
+    private var hashMap: HashMap<String, Any> = HashMap()
+
+
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -38,6 +49,34 @@ class DashboardFragment : Fragment() {
             R.string.tab_hotelvilla,
             R.string.tab_worshipplace
         )
+    }
+    override fun onStart() {
+        checkOnlineState("online")
+        super.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        checkOnlineState(System.currentTimeMillis().toString())
+    }
+
+    override fun onResume() {
+        checkOnlineState("online")
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        checkOnlineState(System.currentTimeMillis().toString())
+        super.onDestroy()
+    }
+
+    private fun checkOnlineState(onlineState: String) {
+        myUid = FirebaseAuth.getInstance().currentUser?.uid
+        dbReference = FirebaseDatabase.getInstance().getReference("users").child(myUid.toString())
+
+        hashMap.put("onlineState", onlineState)
+        dbReference.updateChildren(hashMap)
+
     }
 
     override fun onCreateView(
