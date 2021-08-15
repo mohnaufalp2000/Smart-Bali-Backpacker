@@ -14,7 +14,7 @@
         android:layout_marginTop="48dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/smart_bali_backpacker"
-        android:textColor="@color/white"
+        android:textColor="@color/txt_app"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="120dp"
-        app:cardBackgroundColor="#52628C"
+        app:cardBackgroundColor="@color/bg_primary"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/login"
-                android:textColor="@color/white"
+                android:textColor="@color/txt_app"
                 android:textSize="24sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -62,16 +62,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:hint="@string/email"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/txt_middle"
                 app:startIconDrawable="@drawable/ic_baseline_email_24"
-                app:startIconTint="@color/white">
+                app:startIconTint="@color/txt_app">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/white"
+                    android:textColor="@color/txt_app"
                     android:textSize="12sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -84,11 +84,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:hint="@string/password"
-                app:endIconTint="@color/white"
+                app:endIconTint="@color/txt_app"
                 app:endIconMode="password_toggle"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/txt_middle"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                app:startIconTint="@color/white">
+                app:startIconTint="@color/txt_app">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"

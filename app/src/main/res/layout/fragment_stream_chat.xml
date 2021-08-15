@@ -44,12 +44,12 @@
                 app:tabTextAppearance="@style/TextAppearance.App.Button"
                 app:layout_collapseMode="pin"
                 app:tabMode="fixed"
-                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorColor="@color/bg_blue_dark"
                 app:tabIndicatorGravity="center"
                 app:tabIndicatorHeight="34dp"
                 app:tabIndicatorFullWidth="true"
                 app:tabIndicator="@drawable/bg_tab_indicator_white"
-                app:tabSelectedTextColor="@color/bg_primary_dark"
+                app:tabSelectedTextColor="@color/white"
                 app:tabTextColor="#CFCFCF" />
 
         </androidx.appcompat.widget.Toolbar>

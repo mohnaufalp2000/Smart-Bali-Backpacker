@@ -26,7 +26,7 @@
         android:maxWidth="200dp"
         android:padding="10dp"
         android:text="Hallo"
-        android:textColor="@color/white"
+        android:textColor="@color/txt_app"
         app:layout_constraintStart_toEndOf="@+id/iv_chatbox_photo"
         app:layout_constraintTop_toTopOf="@+id/iv_chatbox_photo" />
 
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="02/05/2021 05:40 "
-        android:textColor="@color/white"
+        android:textColor="@color/txt_app"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_chatbox_message"
         app:layout_constraintStart_toEndOf="@+id/tv_chatbox_message" />
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:text="seen"
         android:layout_marginLeft="10dp"
-        android:textColor="#C1C1C1"
+        android:textColor="@color/txt_middle"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_chatbox_timestamp"
         app:layout_constraintStart_toEndOf="@+id/tv_chatbox_message" />

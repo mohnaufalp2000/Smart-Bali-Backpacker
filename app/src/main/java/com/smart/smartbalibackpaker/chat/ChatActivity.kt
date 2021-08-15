@@ -124,7 +124,7 @@ class ChatActivity : AppCompatActivity() {
                     if (onTypingState.equals(myUid)){
                         binding.tvChatActToolbarStatus.apply {
                             text = "typing..."
-                            setTextColor(Color.parseColor("#E5E5E5"))
+                            setTextColor(Color.parseColor("#A9A9A9"))
                         }
                     } else {
                         if (onlineState.equals("online")) {
@@ -141,7 +141,7 @@ class ChatActivity : AppCompatActivity() {
 
                             binding.tvChatActToolbarStatus.apply {
                                 text = "last seen $dateTime"
-                                setTextColor(Color.parseColor("#E5E5E5"))
+                                setTextColor(Color.parseColor("#A9A9A9"))
                             }
                         }
                     }

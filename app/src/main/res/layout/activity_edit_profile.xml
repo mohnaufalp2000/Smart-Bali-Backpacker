@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:title="@string/edit_profile"
-            app:titleTextColor="@color/white">
+            app:titleTextColor="@color/txt_app">
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -67,19 +67,19 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/username"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/txt_app"
         android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_edit_profile"
         app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-        app:startIconTint="@color/white">
+        app:startIconTint="@color/txt_app">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/txt_app"
             android:textSize="12sp" />
 
     </com.google.android.material.textfield.TextInputLayout>

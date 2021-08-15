@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:text="Tourist Places Fragment"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/txt_app"
         android:gravity="center"/>
 
 </FrameLayout>

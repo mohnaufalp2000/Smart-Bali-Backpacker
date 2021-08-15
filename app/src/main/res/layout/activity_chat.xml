@@ -38,7 +38,7 @@
                 android:layout_marginLeft="14dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Username"
-                android:textColor="@color/white"
+                android:textColor="@color/txt_app"
                 app:layout_constraintStart_toEndOf="@+id/iv_chat_act_toolbar_photo"
                 app:layout_constraintTop_toTopOf="@+id/iv_chat_act_toolbar_photo" />
 
@@ -49,7 +49,7 @@
                 android:layout_marginLeft="14dp"
                 android:fontFamily="@font/poppins_light"
                 android:text="Online"
-                android:textColor="@color/white"
+                android:textColor="@color/txt_app"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_chat_act_toolbar_photo"
                 app:layout_constraintStart_toEndOf="@+id/iv_chat_act_toolbar_photo" />

@@ -6,14 +6,15 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.smart.smartbalibackpaker.EditProfileActivity
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.auth.LoginActivity
-
 
 class PreferencesSettings : PreferenceFragmentCompat() {
 
@@ -43,17 +44,23 @@ class PreferencesSettings : PreferenceFragmentCompat() {
     }
 
     private fun setupDarkMode() {
-        darkMode = resources.getString(R.string.key_dark_mode)
-        darkModePreferences = findPreference<SwitchPreference>(darkMode) as SwitchPreference
-
-        darkModePreferences.onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener{_,_ ->
-                darkModePreferences.isChecked = !darkModePreferences.isChecked
-
-                true
+        val listPreference =
+            findPreference<Preference>(getString(R.string.key_dark_mode)) as ListPreference?
+        listPreference?.setOnPreferenceChangeListener { _, newValue ->
+            when(newValue){
+                "auto"  -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                "on"    -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
+                "off"   -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             }
+            true
+        }
     }
 
+    private fun updateTheme(nightMode: Int): Boolean {
+        AppCompatDelegate.setDefaultNightMode(nightMode)
+        requireActivity().recreate()
+        return true
+    }
 
     private fun setupEditProfile() {
         editProfile = resources.getString(R.string.key_edit_profile)

@@ -5,9 +5,12 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="txt_app">#FF000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_primary_dark">#25345F</color>
-    <color name="bg_primary">#3D5188</color>
+    <color name="bg_primary_dark">#EFEFEF</color>
+    <color name="bg_primary">#FBFBFB</color>
+    <color name="bg_blue_dark">#25345F</color>
+    <color name="bg_blue">#3D5188</color>
     <color name="txt_middle">#A9A9A9</color>
 </resources>

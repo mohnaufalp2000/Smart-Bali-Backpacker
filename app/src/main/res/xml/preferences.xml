@@ -20,14 +20,14 @@
         app:allowDividerBelow="true"
         />
 
-    <SwitchPreference
-        android:key="@string/key_dark_mode"
-        app:title="Dark Mode"
-        android:singleLine="true"
+    <ListPreference
+        app:defaultValue="@string/pref_dark_auto"
+        app:entries="@array/dark_mode"
+        app:entryValues="@array/dark_mode_value"
+        app:key="@string/key_dark_mode"
         android:icon="@drawable/darkmode"
-        app:allowDividerAbove="true"
-        app:allowDividerBelow="true"
-        />
+        app:title="Theme Display"
+        app:useSimpleSummaryProvider="true" />
 
     <Preference
         android:key="@string/key_edit_languages"

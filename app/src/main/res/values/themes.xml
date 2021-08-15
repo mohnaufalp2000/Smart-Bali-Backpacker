@@ -28,7 +28,7 @@
     </style>
 
     <style name="SettingsFragmentStyle">
-        <item name="android:textColor">#FFFFFF</item>...
+        <item name="android:textColor">@color/txt_app</item>...
     </style>
 
     <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
