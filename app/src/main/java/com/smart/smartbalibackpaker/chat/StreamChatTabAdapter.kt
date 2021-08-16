@@ -2,7 +2,6 @@ package com.smart.smartbalibackpaker.chat
 
 import androidx.fragment.app.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.smart.smartbalibackpaker.HotelVillaFragment
 
 class StreamChatTabAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 

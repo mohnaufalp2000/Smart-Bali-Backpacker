@@ -130,9 +130,9 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //TODO -> REMOVE AFTER SIMULATING LAYOUT
-        binding?.sampleItem?.setOnClickListener {
-            startActivity(Intent(context, DetailActivity::class.java))
-        }
+//        binding?.sampleItem?.setOnClickListener {
+//            startActivity(Intent(context, DetailActivity::class.java))
+//        }
 
         val dashboardPlaceAdapter = activity?.let { DashboardPlaceAdapter(it) }
 

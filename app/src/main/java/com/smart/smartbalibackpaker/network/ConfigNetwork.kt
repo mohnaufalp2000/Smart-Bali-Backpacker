@@ -1,0 +1,17 @@
+package com.smart.smartbalibackpaker.network
+
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+class ConfigNetwork {
+    companion object {
+        fun getRetrofit(): TourismService {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://backpacker.igsindonesia.org/data/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            return retrofit.create(TourismService::class.java)
+        }
+    }
+}

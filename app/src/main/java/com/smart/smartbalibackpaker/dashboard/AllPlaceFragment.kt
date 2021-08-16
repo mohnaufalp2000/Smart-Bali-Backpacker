@@ -18,7 +18,6 @@ class AllPlaceFragment : Fragment() {
     ): View? {
         _binding = FragmentAllPlaceBinding.inflate(inflater, container, false)
         return binding?.root
-//        return inflater.inflate(R.layout.fragment_hotel_villa, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
