@@ -10,6 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.smart.smartbalibackpaker.dashboard.DetailPlaceViewModel
 import com.smart.smartbalibackpaker.data.source.local.entity.TourismDataEntity
 import com.smart.smartbalibackpaker.databinding.ActivityDetailBinding
@@ -19,6 +23,9 @@ import com.smart.smartbalibackpaker.vo.Status
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var auth : FirebaseAuth
+    private lateinit var user: FirebaseUser
+    private lateinit var db: FirebaseDatabase
     private val detailPlaceViewModel by lazy {
         ViewModelProvider(
             this, ViewModelFactory.getInstance(this)
@@ -39,6 +46,49 @@ class DetailActivity : AppCompatActivity() {
         showProgressBarDetails(true)
         if (id != 0 && type != null) {
             getDetails(id)
+        }
+
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser!!
+        db = FirebaseDatabase.getInstance()
+
+        createGroupChat()
+    }
+
+    private fun createGroupChat() {
+        binding.btnJoinGroupChat.setOnClickListener {
+            val title = binding.tvDetailTitle.text.toString()
+            val time = "${System.currentTimeMillis()}"
+            val createGroup : HashMap<String, String> = HashMap()
+
+            createGroup.apply {
+                put("groupId", time)
+                put("groupTitle", title)
+                put("time", time)
+                put("createdBy", auth.uid.toString())
+            }
+
+            val ref : DatabaseReference = db.getReference("groups")
+            ref.child(time).setValue(createGroup)
+                .addOnSuccessListener {
+                    val addMember : HashMap<String, String> = HashMap()
+                    addMember.put("uid", auth.uid.toString())
+                    addMember.put("role", "creator")
+                    addMember.put("time", time)
+
+                    val refMember = db.getReference("groups")
+                    refMember.child(time).child("member").child(auth.uid.toString())
+                        .setValue(addMember)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Group Succesfully Created", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                        }
+                }
+                .addOnFailureListener {
+//                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
