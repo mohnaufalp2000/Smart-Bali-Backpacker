@@ -1,4 +1,3 @@
-
 package com.smart.smartbalibackpaker.core.preferences
 
 import android.content.Intent
@@ -7,7 +6,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat

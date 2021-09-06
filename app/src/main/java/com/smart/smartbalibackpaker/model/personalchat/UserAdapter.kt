@@ -1,4 +1,4 @@
-package com.smart.smartbalibackpaker.model
+package com.smart.smartbalibackpaker.model.personalchat
 
 import android.content.Context
 import android.content.Intent

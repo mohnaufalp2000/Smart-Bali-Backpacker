@@ -16,9 +16,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.MainActivity
 import com.smart.smartbalibackpaker.databinding.ActivityChatBinding
-import com.smart.smartbalibackpaker.model.ChatAdapter
-import com.smart.smartbalibackpaker.model.ModelChat
-import com.smart.smartbalibackpaker.utils.OnlineChecker
+import com.smart.smartbalibackpaker.model.personalchat.ChatAdapter
+import com.smart.smartbalibackpaker.model.personalchat.ModelChat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap

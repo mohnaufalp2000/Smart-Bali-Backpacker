@@ -3,7 +3,6 @@
     package="com.smart.smartbalibackpaker">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
@@ -16,12 +15,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SmartBaliBackpaker">
-        <activity android:name=".chat.ChatActivity"></activity>
-        <activity android:name=".auth.AddPhotoActivity"></activity>
+        android:theme="@style/Theme.SmartBaliBackpaker"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".chat.GroupAddMemberActivity"></activity>
+        <activity android:name=".chat.GroupChatActivity" />
+        <activity android:name=".chat.ChatActivity" />
+        <activity android:name=".auth.AddPhotoActivity" />
         <activity android:name=".ChangePassActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".EditProfileActivity" />

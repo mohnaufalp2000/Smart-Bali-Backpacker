@@ -1,4 +1,4 @@
-package com.smart.smartbalibackpaker.model
+package com.smart.smartbalibackpaker.model.personalchat
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -29,12 +29,12 @@ class ChatAdapter(val context: Context, private val listChat: ArrayList<ModelCha
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        if (viewType == MSG_TYPE_LEFT) {
+        return if (viewType == MSG_TYPE_LEFT) {
             val binding = LayoutInflater.from(context).inflate(R.layout.row_chat_left,parent, false)
-            return ListViewHolder(binding)
+            ListViewHolder(binding)
         } else {
             val binding = LayoutInflater.from(context).inflate(R.layout.row_chat_right,parent, false)
-            return ListViewHolder(binding)
+            ListViewHolder(binding)
         }
     }
 
