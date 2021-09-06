@@ -1,11 +1,13 @@
 package com.smart.smartbalibackpaker
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -14,11 +16,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.smart.smartbalibackpaker.dashboard.DetailPlaceViewModel
 import com.smart.smartbalibackpaker.data.source.local.entity.TourismDataEntity
 import com.smart.smartbalibackpaker.databinding.ActivityDetailBinding
 import com.smart.smartbalibackpaker.viewmodel.ViewModelFactory
 import com.smart.smartbalibackpaker.vo.Status
+import java.io.ByteArrayOutputStream
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -26,6 +32,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var user: FirebaseUser
     private lateinit var db: FirebaseDatabase
+    private lateinit var storage : FirebaseStorage
+    private lateinit var imageUri : Uri
     private val detailPlaceViewModel by lazy {
         ViewModelProvider(
             this, ViewModelFactory.getInstance(this)
@@ -51,6 +59,7 @@ class DetailActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
         db = FirebaseDatabase.getInstance()
+        storage = FirebaseStorage.getInstance()
 
         createGroupChat()
     }
@@ -60,10 +69,16 @@ class DetailActivity : AppCompatActivity() {
             val title = binding.tvDetailTitle.text.toString()
             val time = "${System.currentTimeMillis()}"
             val createGroup : HashMap<String, String> = HashMap()
+            val imageRef : StorageReference = storage.reference.child("images/$time")
+            val imgBitmap = binding.imgDetailPoster.drawable.toBitmap()
+            imageUri = getImageUriFromBitmap(imgBitmap)
+
+            imageRef.putFile(imageUri)
 
             createGroup.apply {
                 put("groupId", time)
                 put("groupTitle", title)
+                put("groupImage", imageUri.toString())
                 put("time", time)
                 put("createdBy", auth.uid.toString())
             }
@@ -72,9 +87,9 @@ class DetailActivity : AppCompatActivity() {
             ref.child(time).setValue(createGroup)
                 .addOnSuccessListener {
                     val addMember : HashMap<String, String> = HashMap()
-                    addMember.put("uid", auth.uid.toString())
-                    addMember.put("role", "creator")
-                    addMember.put("time", time)
+                    addMember["uid"] = auth.uid.toString()
+                    addMember["role"] = "creator"
+                    addMember["time"] = time
 
                     val refMember = db.getReference("groups")
                     refMember.child(time).child("member").child(auth.uid.toString())
@@ -90,6 +105,19 @@ class DetailActivity : AppCompatActivity() {
 //                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    private fun getImageUriFromBitmap(bitmap : Bitmap) : Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25, bytes)
+        val resolver = applicationContext.contentResolver
+        val path = MediaStore.Images.Media.insertImage(
+            resolver,
+            bitmap,
+            System.currentTimeMillis().toString(),
+            null
+        )
+        return Uri.parse(path.toString())
     }
 
     override fun onSupportNavigateUp(): Boolean {

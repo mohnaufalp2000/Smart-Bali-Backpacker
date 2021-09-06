@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentGroupChatBinding
-import com.smart.smartbalibackpaker.databinding.FragmentPersonalChatBinding
-import com.smart.smartbalibackpaker.model.GroupChatAdapter
-import com.smart.smartbalibackpaker.model.ModelGroupChat
+import com.smart.smartbalibackpaker.model.groupchat.GroupAdapter
+import com.smart.smartbalibackpaker.model.groupchat.GroupData
 
 class GroupChatFragment : Fragment() {
     private var _binding: FragmentGroupChatBinding? = null
@@ -73,6 +71,7 @@ class GroupChatFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
+        myUid = user.uid
         db = FirebaseDatabase.getInstance()
 
         loadGroupList()
@@ -82,21 +81,21 @@ class GroupChatFragment : Fragment() {
         val ref = db.getReference("groups")
         ref.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val groupList = ArrayList<ModelGroupChat>()
+                val groupList = ArrayList<GroupData>()
                 groupList.clear()
                 for (ds in snapshot.children){
-                    if(ds.child("member").child(auth.uid!!).exists()){
-                        val model = ds.getValue(ModelGroupChat::class.java)
+                    if(ds.child("member").child(myUid!!).exists()){
+                        val model = ds.getValue(GroupData::class.java)
                         if (model != null) {
                             groupList.add(model)
                         }
                     }
                 }
                 groupList.reverse()
-                val adapter = context?.let { GroupChatAdapter(it, groupList) }
-                _binding?.rvChatGroup?.layoutManager = LinearLayoutManager(context)
-                _binding?.rvChatGroup?.setHasFixedSize(true)
-                _binding?.rvChatGroup?.adapter = adapter
+                val adapter = context?.let { GroupAdapter(it, groupList) }
+                binding?.rvChatGroup?.layoutManager = LinearLayoutManager(context)
+                binding?.rvChatGroup?.setHasFixedSize(true)
+                binding?.rvChatGroup?.adapter = adapter
                 Log.d("hohohohoho", adapter.toString())
             }
 

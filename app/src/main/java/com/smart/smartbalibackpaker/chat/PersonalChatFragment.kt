@@ -10,12 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentPersonalChatBinding
-import com.smart.smartbalibackpaker.databinding.FragmentStreamChatBinding
-import com.smart.smartbalibackpaker.model.DataUser
-import com.smart.smartbalibackpaker.model.ChatAdapter
-import com.smart.smartbalibackpaker.model.UserAdapter
+import com.smart.smartbalibackpaker.model.personalchat.DataUser
+import com.smart.smartbalibackpaker.model.personalchat.UserAdapter
 
 class PersonalChatFragment : Fragment() {
 
