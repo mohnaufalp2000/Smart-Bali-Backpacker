@@ -41,12 +41,12 @@ class RegistFirstFormActivity : AppCompatActivity() {
             val startDate = dateSelected.first
             val endDate = dateSelected.second
 
-            if (startDate != null && endDate != null) {
-                binding.etRegistDate1.editText?.doOnTextChanged { date,_,_,_ ->  it = startDate}
-//                =
-//                    "Reserved\nStartDate: ${convertLongToTime(startDate)}\n" +
-//                            "EndDate: ${convertLongToTime(endDate)}"
-            }
+//            if (startDate != null && endDate != null) {
+//                binding.etRegistDate1.editText?.doOnTextChanged { date,_,_,_ ->  it = startDate}
+////                =
+////                    "Reserved\nStartDate: ${convertLongToTime(startDate)}\n" +
+////                            "EndDate: ${convertLongToTime(endDate)}"
+//            }
         }
 
     }
