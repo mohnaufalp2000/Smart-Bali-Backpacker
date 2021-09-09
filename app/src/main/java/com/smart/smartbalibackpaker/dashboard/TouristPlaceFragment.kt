@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.smart.smartbalibackpaker.databinding.FragmentTouristPlaceBinding
-import com.smart.smartbalibackpaker.viewmodel.ViewModelFactory
-import com.smart.smartbalibackpaker.vo.Status
+import com.smart.smartbalibackpaker.core.viewmodel.ViewModelFactory
+import com.smart.smartbalibackpaker.core.vo.Status
 
 class TouristPlaceFragment : Fragment() {
 

@@ -10,8 +10,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.smart.smartbalibackpaker.databinding.ActivityGroupAddMemberBinding
-import com.smart.smartbalibackpaker.model.groupchat.AddGroupMemberAdapter
-import com.smart.smartbalibackpaker.model.personalchat.DataUser
+import com.smart.smartbalibackpaker.core.model.groupchat.AddGroupMemberAdapter
+import com.smart.smartbalibackpaker.core.model.personalchat.DataUser
 
 class GroupAddMemberActivity : AppCompatActivity() {
 
