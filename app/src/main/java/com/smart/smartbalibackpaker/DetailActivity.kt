@@ -19,10 +19,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.smart.smartbalibackpaker.dashboard.DetailPlaceViewModel
-import com.smart.smartbalibackpaker.data.source.local.entity.TourismDataEntity
+import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
 import com.smart.smartbalibackpaker.databinding.ActivityDetailBinding
-import com.smart.smartbalibackpaker.viewmodel.ViewModelFactory
-import com.smart.smartbalibackpaker.vo.Status
+import com.smart.smartbalibackpaker.core.viewmodel.ViewModelFactory
+import com.smart.smartbalibackpaker.core.vo.Status
 import java.io.ByteArrayOutputStream
 
 
