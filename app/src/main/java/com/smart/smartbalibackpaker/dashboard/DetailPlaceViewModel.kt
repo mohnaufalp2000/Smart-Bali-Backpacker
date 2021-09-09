@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.smart.smartbalibackpaker.data.TourismRepository
-import com.smart.smartbalibackpaker.data.source.local.entity.TourismDataEntity
-import com.smart.smartbalibackpaker.vo.Resource
+import com.smart.smartbalibackpaker.core.data.TourismRepository
+import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
+import com.smart.smartbalibackpaker.core.vo.Resource
 
 class DetailPlaceViewModel(private val tourismRepository: TourismRepository) : ViewModel() {
 

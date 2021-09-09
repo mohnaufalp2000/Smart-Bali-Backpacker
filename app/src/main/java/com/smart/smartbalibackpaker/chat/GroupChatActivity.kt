@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +15,8 @@ import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.chat.GroupAddMemberActivity.Companion.GROUP_ID_ADD
 import com.smart.smartbalibackpaker.databinding.ActivityGroupChatBinding
-import com.smart.smartbalibackpaker.model.groupchat.GroupChatAdapter
-import com.smart.smartbalibackpaker.model.groupchat.ModelGroupChat
+import com.smart.smartbalibackpaker.core.model.groupchat.GroupChatAdapter
+import com.smart.smartbalibackpaker.core.model.groupchat.ModelGroupChat
 
 class GroupChatActivity : AppCompatActivity() {
 
