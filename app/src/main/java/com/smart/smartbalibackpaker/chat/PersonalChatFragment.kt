@@ -11,8 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.databinding.FragmentPersonalChatBinding
-import com.smart.smartbalibackpaker.model.personalchat.DataUser
-import com.smart.smartbalibackpaker.model.personalchat.UserAdapter
+import com.smart.smartbalibackpaker.core.model.personalchat.DataUser
+import com.smart.smartbalibackpaker.core.model.personalchat.UserAdapter
 
 class PersonalChatFragment : Fragment() {
 

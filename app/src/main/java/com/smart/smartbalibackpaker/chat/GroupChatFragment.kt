@@ -11,8 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.databinding.FragmentGroupChatBinding
-import com.smart.smartbalibackpaker.model.groupchat.GroupAdapter
-import com.smart.smartbalibackpaker.model.groupchat.GroupData
+import com.smart.smartbalibackpaker.core.model.groupchat.GroupAdapter
+import com.smart.smartbalibackpaker.core.model.groupchat.GroupData
 
 class GroupChatFragment : Fragment() {
     private var _binding: FragmentGroupChatBinding? = null
