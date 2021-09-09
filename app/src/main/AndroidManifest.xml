@@ -19,7 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartBaliBackpaker"
         android:usesCleartextTraffic="true">
-        <activity android:name=".chat.GroupAddMemberActivity"></activity>
+        <activity
+            android:name=".registration.RegistFirstFormActivity"
+            android:exported="true" />
+        <activity android:name=".chat.GroupAddMemberActivity" />
         <activity android:name=".chat.GroupChatActivity" />
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".auth.AddPhotoActivity" />
