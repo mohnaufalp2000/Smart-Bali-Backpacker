@@ -10,7 +10,7 @@ import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.chat.ChatActivity
 import com.smart.smartbalibackpaker.databinding.ItemRowUserBinding
 
-class UserAdapter(val context: Context, private val listUser: ArrayList<DataUser>) : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
+class UserAdapter(val context: Context?, private val listUser: ArrayList<DataUser>) : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
     class ListViewHolder(private val binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: DataUser) {

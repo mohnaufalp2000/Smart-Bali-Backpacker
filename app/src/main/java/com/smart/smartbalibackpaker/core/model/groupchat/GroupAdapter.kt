@@ -76,12 +76,11 @@ class GroupAdapter(val context: Context, private val listChat: ArrayList<GroupDa
                                     for(ds in snapshot.children){
                                         val username = ds.child("username").value
 
-                                        holder.binding.tvSender.text = username.toString()
+                                        holder.binding.tvSender.text = "${username.toString()}: "
                                     }
                                 }
 
                                 override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
                                 }
                             })
                     }

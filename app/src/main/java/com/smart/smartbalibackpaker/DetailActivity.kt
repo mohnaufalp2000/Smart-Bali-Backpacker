@@ -1,9 +1,11 @@
 package com.smart.smartbalibackpaker
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +16,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.smart.smartbalibackpaker.chat.GroupChatActivity
+import com.smart.smartbalibackpaker.chat.GroupChatActivity.Companion.GROUP_ID
 import com.smart.smartbalibackpaker.dashboard.DetailPlaceViewModel
 import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
 import com.smart.smartbalibackpaker.databinding.ActivityDetailBinding
@@ -83,27 +86,118 @@ class DetailActivity : AppCompatActivity() {
                 put("createdBy", auth.uid.toString())
             }
 
-            val ref : DatabaseReference = db.getReference("groups")
-            ref.child(time).setValue(createGroup)
-                .addOnSuccessListener {
-                    val addMember : HashMap<String, String> = HashMap()
-                    addMember["uid"] = auth.uid.toString()
-                    addMember["role"] = "creator"
-                    addMember["time"] = time
+            val groupExist = db.getReference("groups")
+            groupExist.orderByChild("groupTitle").equalTo(title)
+                .addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(ds in snapshot.children){
+                            val groupTitle = ds.child("groupTitle").value.toString()
+                            val groupId = ds.child("groupId").value.toString()
 
-                    val refMember = db.getReference("groups")
-                    refMember.child(time).child("member").child(auth.uid.toString())
-                        .setValue(addMember)
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Group Succesfully Created", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener {
-                            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                        }
-                }
-                .addOnFailureListener {
+                            // if group already exist
+                            if(title == groupTitle){
+                                val ref = db.getReference("groups").child(groupId).child("member")
+                                ref.orderByChild("uid").equalTo(user.uid)
+                                    .addListenerForSingleValueEvent(object: ValueEventListener{
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            // if user is a member of group
+                                            if(snapshot.exists()){
+                                                val intent = Intent(this@DetailActivity, GroupChatActivity::class.java)
+                                                intent.putExtra(GROUP_ID, groupId)
+                                                startActivity(intent)
+                                                Toast.makeText(applicationContext, "Group Already Exist", Toast.LENGTH_SHORT).show()
+                                            }
+                                            // if user is not a member of group
+                                            else {
+                                                val timestamp = System.currentTimeMillis()
+                                                val hashMap : HashMap<String, String> = HashMap()
+                                                hashMap["uid"] = user.uid
+                                                hashMap["role"] = "member"
+                                                hashMap["time"] = timestamp.toString()
+
+                                                val addRef = db.getReference("groups")
+                                                addRef.child(groupId).child("member").child(user.uid).setValue(hashMap)
+                                                    .addOnSuccessListener {
+                                                        val intent = Intent(this@DetailActivity, GroupChatActivity::class.java)
+                                                        intent.putExtra(GROUP_ID, groupId)
+                                                        startActivity(intent)
+                                                        Toast.makeText(applicationContext, "Added Successfully", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                    .addOnFailureListener {
+                                                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                                                    }
+                                            }
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {
+                                        }
+                                    })
+//                                Toast.makeText(applicationContext, "Group Already Exist", Toast.LENGTH_SHORT).show()
+                            }
+                            // if group not exist
+                            else {
+                                val ref : DatabaseReference = db.getReference("groups")
+                                ref.child(time).setValue(createGroup)
+                                    .addOnSuccessListener {
+                                        val addMember : HashMap<String, String> = HashMap()
+                                        addMember["uid"] = auth.uid.toString()
+                                        addMember["role"] = "creator"
+                                        addMember["time"] = time
+
+                                        val refMember = db.getReference("groups")
+                                        refMember.child(time).child("member").child(auth.uid.toString())
+                                            .setValue(addMember)
+                                            .addOnSuccessListener {
+                                                val intent = Intent(this@DetailActivity, GroupChatActivity::class.java)
+                                                intent.putExtra(GROUP_ID, time)
+                                                startActivity(intent)
+                                                Toast.makeText(applicationContext, "Group Succesfully Created", Toast.LENGTH_SHORT).show()
+                                            }
+                                            .addOnFailureListener {
+                                                Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                                            }
+                                    }
+                                    .addOnFailureListener {
 //                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
+                    }
+                    else {
+                        val ref : DatabaseReference = db.getReference("groups")
+                        ref.child(time).setValue(createGroup)
+                            .addOnSuccessListener {
+                                val addMember : HashMap<String, String> = HashMap()
+                                addMember["uid"] = auth.uid.toString()
+                                addMember["role"] = "creator"
+                                addMember["time"] = time
+
+                                val refMember = db.getReference("groups")
+                                refMember.child(time).child("member").child(auth.uid.toString())
+                                    .setValue(addMember)
+                                    .addOnSuccessListener {
+                                        val intent = Intent(this@DetailActivity, GroupChatActivity::class.java)
+                                        intent.putExtra(GROUP_ID, time)
+                                        startActivity(intent)
+                                        Toast.makeText(applicationContext, "Group Succesfully Created", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                            .addOnFailureListener {
+//                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+
+
+
         }
     }
 

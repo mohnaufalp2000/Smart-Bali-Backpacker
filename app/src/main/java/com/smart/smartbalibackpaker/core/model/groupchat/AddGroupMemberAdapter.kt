@@ -38,16 +38,18 @@ class AddGroupMemberAdapter(val context: Context, private val listUser: ArrayLis
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.bind(listUser[position])
 
+        val uid  = listUser[position].id
+
         checkIfAlreadyExist(listUser[position], holder)
 
         holder.itemView.setOnClickListener {
             val ref = FirebaseDatabase.getInstance().getReference("groups")
-            ref.child(groupId).child("member").child("uid")
+            ref.child(groupId).child("member").child(uid)
                 .addListenerForSingleValueEvent(object: ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if(snapshot.exists()) {
                             val previousRole = snapshot.child("role").value.toString()
-                            var options = arrayOf("")
+                            val options: Array<String>
 
                             val builder = AlertDialog.Builder(context)
                             builder.setTitle("Choose Option")
@@ -81,37 +83,39 @@ class AddGroupMemberAdapter(val context: Context, private val listUser: ArrayLis
                                     }.show()
                                 }
                             } else if (myGroupRole == "admin") {
-                                if (previousRole == "creator") {
-                                    Toast.makeText(context, "Creator Of Group", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
-                                else if (previousRole == "admin") {
-                                    options = arrayOf("Remove Admin", "Remove User")
-                                    builder.setItems(
-                                        options
-                                    ) { dialog, which ->
-                                        if (which == 0) {
-                                            //Remove Admin Clicked
-                                            removeAdmin(listUser[position])
-                                        } else {
-                                            //Remove User Clicked
-                                            removeMember(listUser[position])
-                                        }
-                                    }.show()
-                                }
-                                else if (previousRole == "member") {
-                                    options = arrayOf("Make Admin", "Remove User")
-                                    builder.setItems(
-                                        options
-                                    ) { dialog, which ->
-                                        if (which == 0) {
-                                            //Remove Admin Clicked
-                                            makeAdmin(listUser[position])
-                                        } else {
-                                            //Remove User Clicked
-                                            removeMember(listUser[position])
-                                        }
-                                    }.show()
+                                when (previousRole) {
+                                    "creator" -> {
+                                        Toast.makeText(context, "Creator Of Group", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                    "admin" -> {
+                                        options = arrayOf("Remove Admin", "Remove User")
+                                        builder.setItems(
+                                            options
+                                        ) { dialog, which ->
+                                            if (which == 0) {
+                                                //Remove Admin Clicked
+                                                removeAdmin(listUser[position])
+                                            } else {
+                                                //Remove User Clicked
+                                                removeMember(listUser[position])
+                                            }
+                                        }.show()
+                                    }
+                                    "member" -> {
+                                        options = arrayOf("Make Admin", "Remove User")
+                                        builder.setItems(
+                                            options
+                                        ) { dialog, which ->
+                                            if (which == 0) {
+                                                //Remove Admin Clicked
+                                                makeAdmin(listUser[position])
+                                            } else {
+                                                //Remove User Clicked
+                                                removeMember(listUser[position])
+                                            }
+                                        }.show()
+                                    }
                                 }
                             }
                         } else {
@@ -192,7 +196,7 @@ class AddGroupMemberAdapter(val context: Context, private val listUser: ArrayLis
             }
     }
 
-    private fun checkIfAlreadyExist(dataUser: DataUser, holder: AddGroupMemberAdapter.ListViewHolder) {
+    private fun checkIfAlreadyExist(dataUser: DataUser, holder: ListViewHolder) {
         val ref = FirebaseDatabase.getInstance().getReference("groups")
         ref.child(groupId).child("member").child(dataUser.id)
             .addListenerForSingleValueEvent(object: ValueEventListener{
