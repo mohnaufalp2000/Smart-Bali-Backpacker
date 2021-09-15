@@ -98,14 +98,13 @@ class PersonalChatFragment : Fragment() {
                             listUser.add(data)
                         }
                     }
-                    adapter = context?.let { UserAdapter(it, listUser) }!!
+                    adapter = context?.let { UserAdapter(it, listUser) } ?: UserAdapter(context, ArrayList<DataUser>())
                     binding?.rvChatPersonal?.adapter = adapter
                 }
 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
             }
 
         })

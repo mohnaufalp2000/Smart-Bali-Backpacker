@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.chat.GroupAddMemberActivity.Companion.GROUP_ID_ADD
+import com.smart.smartbalibackpaker.chat.GroupInfoActivity.Companion.GROUP_ID_INFO
 import com.smart.smartbalibackpaker.databinding.ActivityGroupChatBinding
 import com.smart.smartbalibackpaker.core.model.groupchat.GroupChatAdapter
 import com.smart.smartbalibackpaker.core.model.groupchat.ModelGroupChat
@@ -46,23 +48,18 @@ class GroupChatActivity : AppCompatActivity() {
         setupMenu()
 
         binding.btnSendGroupChat.setOnClickListener {
+            Log.d("akuanakupn", groupId.toString())
             val message = binding.etGroupChatBox.text.toString()
             validateMessage(message)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_add_member)?.isVisible =
-            (myGroupRole == "creator" || myGroupRole == "admin")
-        return super.onCreateOptionsMenu(menu)
-    }
-
     private fun setupMenu() {
         binding.toolbarGroupChat.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
-                R.id.action_add_member ->{
-                    val intent = Intent(this, GroupAddMemberActivity::class.java)
-                    intent.putExtra(GROUP_ID_ADD, groupId)
+                R.id.action_group_info -> {
+                    val intent = Intent(this, GroupInfoActivity::class.java)
+                    intent.putExtra(GROUP_ID_INFO, groupId)
                     startActivity(intent)
                     true
                 }
@@ -74,7 +71,7 @@ class GroupChatActivity : AppCompatActivity() {
     private fun loadMyGroupRole() {
         val ref = db.getReference("groups")
         ref.child(groupId ?: "").child("member")
-            .orderByChild("uid").equalTo(auth.uid)
+            .orderByChild("uid").equalTo(user.uid)
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for(ds in snapshot.children){

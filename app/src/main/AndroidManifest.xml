@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SmartBaliBackpaker"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".chat.GroupInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".registration.RegistFirstFormActivity"
             android:exported="true" />
         <activity android:name=".chat.GroupAddMemberActivity" />

@@ -65,4 +65,7 @@
     <string name="dark_mode_on">Dark mode</string>
     <string name="dark_mode_off">Light mode</string>
     <string name="add_member">Add Member</string>
+    <string name="group_info">Group Info</string>
+    <string name="add_participant">Add Participant</string>
+    <string name="leave_group">Leave Group</string>
 </resources>

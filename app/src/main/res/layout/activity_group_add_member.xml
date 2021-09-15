@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
     tools:context=".chat.GroupAddMemberActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,17 +15,7 @@
             android:id="@+id/tb_add_member"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/bg_primary">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add_member"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/txt_app"
-                />
-
-        </androidx.appcompat.widget.Toolbar>
+            android:background="@color/bg_primary"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

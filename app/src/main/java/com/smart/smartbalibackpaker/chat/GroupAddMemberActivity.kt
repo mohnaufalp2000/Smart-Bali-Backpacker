@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.ActivityGroupAddMemberBinding
 import com.smart.smartbalibackpaker.core.model.groupchat.AddGroupMemberAdapter
 import com.smart.smartbalibackpaker.core.model.personalchat.DataUser
@@ -87,6 +88,9 @@ class GroupAddMemberActivity : AppCompatActivity() {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 if (snapshot.exists()){
                                     myGroupRole = snapshot.child("role").value.toString()
+                                    setSupportActionBar(binding.tbAddMember)
+                                    val title = resources.getString(R.string.add_member)
+                                    supportActionBar?.title = "$title ($myGroupRole)"
 
                                     getAllUsers()
                                 }

@@ -13,10 +13,10 @@
         android:layout_height="60dp"
         android:background="@color/bg_primary"
         app:contentInsetStart="0dp"
-        app:menu="@menu/menu_group_chat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_group_chat">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,8 +26,8 @@
                 android:id="@+id/iv_group_chat_act_toolbar_photo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="20dp"
                 android:layout_marginVertical="10dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/account"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,13 +48,21 @@
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat_act"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_group_chat"
-        tools:listitem="@layout/row_group_chat_right"
-        tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat_act"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="120dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:clipToPadding="false"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_group_chat"
+            tools:listitem="@layout/row_group_chat_right"
+            tools:layout_editor_absoluteX="0dp" />
+
 
     <EditText
         android:id="@+id/et_group_chat_box"
@@ -63,12 +71,12 @@
         android:layout_marginVertical="10dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="50dp"
-        android:hint="Start typing ..."
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:paddingStart="16dp"
-        android:textColorHint="#6C6C6C"
         android:background="@drawable/bg_searchbox"
+        android:hint="Start typing ..."
+        android:paddingStart="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="#6C6C6C"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
