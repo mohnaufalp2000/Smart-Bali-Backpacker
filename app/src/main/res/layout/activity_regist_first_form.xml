@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_regist_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_searchbox" />
@@ -39,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_regist_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_regist_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_searchbox" />
@@ -57,6 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_regist_phone">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_regist_fill_date1"
             android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_regist_phone">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_regist_fill_date2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_searchbox"
@@ -96,6 +100,8 @@
         app:layout_constraintStart_toEndOf="@+id/et_regist_date1"
         app:layout_constraintTop_toTopOf="@+id/et_regist_date1" />
 
+
+
     <Button
         android:id="@+id/btn_regist_datepicker"
         android:layout_width="match_parent"
@@ -110,6 +116,37 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/et_regist_date1"
         app:layout_constraintTop_toBottomOf="@+id/et_regist_date1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Tempat Kedatangan"
+        app:boxBackgroundColor="@color/bg_primary_dark"
+        app:hintTextColor="@color/txt_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_regist_datepicker">
+
+        <AutoCompleteTextView
+            android:id="@+id/list_arrival_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next_register"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_btn_yellow"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Selanjutnya"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
