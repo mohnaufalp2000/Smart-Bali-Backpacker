@@ -34,9 +34,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
             }
         }
-
         loginUser()
-
     }
 
     private fun showRecoverPassDialog() {

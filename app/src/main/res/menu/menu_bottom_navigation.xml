@@ -10,6 +10,13 @@
         android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search"/>
+
+    <item
+        android:id="@+id/navigation_guide"
+        android:enabled="true"
+        android:icon="@drawable/guide"
+        android:title="@string/guide"/>
+
     <item
         android:id="@+id/navigation_stream_chat"
         android:enabled="true"

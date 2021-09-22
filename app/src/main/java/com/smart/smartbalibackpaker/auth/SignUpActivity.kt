@@ -3,13 +3,9 @@ package com.smart.smartbalibackpaker.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.smart.smartbalibackpaker.MainActivity
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.core.model.User

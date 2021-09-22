@@ -39,7 +39,7 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/poppins"
-        android:text="Uzumaki123"
+        tools:text="Uzumaki123"
         android:textAlignment="center"
         android:textColor="@color/txt_app"
         android:textSize="18sp"

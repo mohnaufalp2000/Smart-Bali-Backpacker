@@ -1,5 +1,6 @@
 package com.smart.smartbalibackpaker.core.model.groupchat
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -35,6 +36,7 @@ class AddGroupMemberAdapter(val context: Context, private val listUser: ArrayLis
         return ListViewHolder(view)
     }
 
+    @SuppressLint("RecyclerView")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.bind(listUser[position])
 

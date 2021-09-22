@@ -68,4 +68,11 @@
     <string name="group_info">Group Info</string>
     <string name="add_participant">Add Participant</string>
     <string name="leave_group">Leave Group</string>
+    <string name="until_date">Until Date</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="until">until</string>
+    <string name="select_dates">Select Dates</string>
+    <string name="tempat_kedatangan">Arrival Place</string>
+    <string name="guide">Guide</string>
+    <string name="daftarkan_saya">Register Me</string>
 </resources>

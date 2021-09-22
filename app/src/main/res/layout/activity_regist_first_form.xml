@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Arrival Date"
+        android:hint="@string/arrival_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_regist_phone">
 
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Until Date"
+        android:hint="@string/until_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_regist_phone">
 
@@ -92,7 +92,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="until"
+        android:text="@string/until"
         android:textColor="@color/txt_app"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/et_regist_date1"
@@ -107,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Select Dates"
+        android:text="@string/select_dates"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:textAllCaps="false"
@@ -122,7 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Tempat Kedatangan"
+        android:hint="@string/tempat_kedatangan"
         app:boxBackgroundColor="@color/bg_primary_dark"
         app:hintTextColor="@color/txt_app"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +140,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next_register"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="45dp"
         android:layout_margin="16dp"
         android:background="@drawable/bg_btn_yellow"
         android:fontFamily="@font/poppins_medium"

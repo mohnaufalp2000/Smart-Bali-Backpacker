@@ -1,6 +1,5 @@
 package com.smart.smartbalibackpaker.chat
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.smart.smartbalibackpaker.MainActivity
-import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.chat.GroupAddMemberActivity.Companion.GROUP_ID_ADD
 import com.smart.smartbalibackpaker.core.model.groupchat.AddGroupMemberAdapter
 import com.smart.smartbalibackpaker.core.model.personalchat.DataUser
@@ -73,10 +71,8 @@ class GroupInfoActivity : AppCompatActivity() {
                                         val delete = db.getReference("groups").child(groupId?: "")
                                         delete.removeValue()
                                             .addOnSuccessListener {
-
                                             }
                                             .addOnFailureListener{
-
                                             }
                                     }
                                 }
@@ -129,11 +125,9 @@ class GroupInfoActivity : AppCompatActivity() {
                                 }
                             }
                         }
-
                         loadMemberGroup()
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                 }
             })

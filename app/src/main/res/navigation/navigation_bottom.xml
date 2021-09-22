@@ -28,5 +28,10 @@
         android:name="com.smart.smartbalibackpaker.SettingFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/navigation_guide"
+        android:name="com.smart.smartbalibackpaker.GuideFragment"
+        android:label="fragment_guide"
+        tools:layout="@layout/fragment_guide" />
 
 </navigation>

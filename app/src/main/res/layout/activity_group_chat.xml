@@ -89,9 +89,9 @@
         android:rotation="-35"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_chat_box"
+        app:layout_constraintBottom_toBottomOf="@+id/et_group_chat_box"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_chat_box"
+        app:layout_constraintStart_toEndOf="@+id/et_group_chat_box"
         app:layout_constraintTop_toTopOf="@+id/et_group_chat_box" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

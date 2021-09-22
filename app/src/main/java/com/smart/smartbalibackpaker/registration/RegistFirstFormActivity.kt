@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.core.widget.doOnTextChanged
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.dashboard.DashboardFragment
