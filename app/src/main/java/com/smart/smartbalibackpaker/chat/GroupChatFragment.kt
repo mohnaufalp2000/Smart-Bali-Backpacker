@@ -55,7 +55,6 @@ class GroupChatFragment : Fragment() {
 
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,5 +103,4 @@ class GroupChatFragment : Fragment() {
             }
         })
     }
-
 }

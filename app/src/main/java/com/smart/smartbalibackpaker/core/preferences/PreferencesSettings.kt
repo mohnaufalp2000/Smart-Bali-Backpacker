@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -12,20 +11,15 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.smart.smartbalibackpaker.EditProfileActivity
 import com.smart.smartbalibackpaker.R
-import com.smart.smartbalibackpaker.auth.LoginActivity
 
 class PreferencesSettings : PreferenceFragmentCompat() {
 
     private lateinit var editProfilePreferences: Preference
     private lateinit var notificationsPreferences: SwitchPreference
     private lateinit var languagesPreferences: Preference
-    private lateinit var darkModePreferences: SwitchPreference
-    private lateinit var logoutProferences: Preference
     private lateinit var editProfile: String
     private lateinit var notifications: String
     private lateinit var languages: String
-    private lateinit var darkMode: String
-
 
     override fun setDivider(divider: Drawable?) {
         super.setDivider(divider)

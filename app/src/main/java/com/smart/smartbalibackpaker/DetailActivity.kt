@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +25,7 @@ import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEnt
 import com.smart.smartbalibackpaker.databinding.ActivityDetailBinding
 import com.smart.smartbalibackpaker.core.viewmodel.ViewModelFactory
 import com.smart.smartbalibackpaker.core.vo.Status
+import com.smart.smartbalibackpaker.registration.RegistFirstFormActivity
 import java.io.ByteArrayOutputStream
 
 
@@ -65,6 +65,9 @@ class DetailActivity : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
 
         createGroupChat()
+        binding.btnRegisterMe.setOnClickListener {
+            startActivity(Intent(this@DetailActivity, RegistFirstFormActivity::class.java))
+        }
     }
 
     private fun createGroupChat() {
@@ -265,6 +268,7 @@ class DetailActivity : AppCompatActivity() {
             tvDetailTitle.text = content.title
             tvDetailLocation.text = content.address
             tvDetailPlaceDesc.text = content.desc
+            btnJoinGroupChat.text = "Join ${content.title} Group Chat"
 
             supportActionBar?.title = content.title
         }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.Menu
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -14,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.R
-import com.smart.smartbalibackpaker.chat.GroupAddMemberActivity.Companion.GROUP_ID_ADD
 import com.smart.smartbalibackpaker.chat.GroupInfoActivity.Companion.GROUP_ID_INFO
 import com.smart.smartbalibackpaker.databinding.ActivityGroupChatBinding
 import com.smart.smartbalibackpaker.core.model.groupchat.GroupChatAdapter
@@ -162,8 +160,6 @@ class GroupChatActivity : AppCompatActivity() {
                     for(ds in snapshot.children){
                         val groupTitle = ds.child("groupTitle").value
                         val groupImage = ds.child("groupImage").value
-                        val time = ds.child("time").value
-                        val createdBy = ds.child("createdBy").value
 
                         binding.tvGroupChatActToolbarTitle.text = groupTitle.toString()
 

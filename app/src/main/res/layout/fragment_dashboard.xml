@@ -59,7 +59,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:text="July 26th, 2021"
                         android:textColor="@color/txt_app"
                         android:textSize="10sp"
                         app:layout_constraintStart_toEndOf="@+id/iv_welcome_photo"
@@ -102,19 +101,7 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-
         </com.google.android.material.appbar.AppBarLayout>
-
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:id="@+id/sample_item"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/vp_dashboard">-->
-
-        <!--            <include layout="@layout/item_grid_place" />-->
-        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_dashboard"

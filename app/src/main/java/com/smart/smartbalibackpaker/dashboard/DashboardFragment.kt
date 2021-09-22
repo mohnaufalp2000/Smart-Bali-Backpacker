@@ -1,5 +1,6 @@
 package com.smart.smartbalibackpaker.dashboard
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,12 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentDashboardBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class DashboardFragment : Fragment() {
 
@@ -30,7 +37,6 @@ class DashboardFragment : Fragment() {
     private var myUid: String? = null
 
     private var hashMap: HashMap<String, Any> = HashMap()
-
 
     companion object {
         @StringRes
@@ -121,9 +127,9 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //TODO -> REMOVE AFTER SIMULATING LAYOUT
-//        binding?.sampleItem?.setOnClickListener {
-//            startActivity(Intent(context, DetailActivity::class.java))
-//        }
+        val dateFormat = SimpleDateFormat("dd/M/yyyy")
+        val currentDate = dateFormat.format(Date())
+        _binding?.tvWelcomeDate?.text = currentDate
 
         val dashboardPlaceAdapter = activity?.let { DashboardPlaceAdapter(it) }
 
@@ -135,29 +141,26 @@ class DashboardFragment : Fragment() {
                 tab.text = resources.getString(TAB_TITLES[position])
             }.attach()
 
-
         val imageList = ArrayList<SlideModel>() // Create image list
 
-        // imageList.add(SlideModel("String Url" or R.drawable)
-        // imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
         imageList.add(
             SlideModel(
-                R.drawable.onboardingone,
-                "Your plan is your best choice ever",
+                R.drawable.besakih,
+                "Pura Besakih",
                 ScaleTypes.CENTER_CROP
             )
         )
         imageList.add(
             SlideModel(
-                R.drawable.onboardingtwo,
-                "Got your experience with the new friends",
+                R.drawable.sanur,
+                "Pantai Sanur",
                 ScaleTypes.CENTER_CROP
             )
         )
         imageList.add(
             SlideModel(
-                R.drawable.onboardingthree,
-                "Enjoy your time everywhere you go",
+                R.drawable.finns,
+                "Finns Beach Club",
                 ScaleTypes.CENTER_CROP
             )
         )
