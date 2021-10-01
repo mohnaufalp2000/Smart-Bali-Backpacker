@@ -12,12 +12,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.smart.smartbalibackpaker.MainActivity
 import com.smart.smartbalibackpaker.R
+import com.smart.smartbalibackpaker.chat.GroupChatActivity
 import com.smart.smartbalibackpaker.core.model.User
+import com.smart.smartbalibackpaker.core.utils.Constant.ALL_GROUP
+import com.smart.smartbalibackpaker.core.utils.Constant.ALL_GROUP_TITLE
 import com.smart.smartbalibackpaker.databinding.ActivityAddPhotoBinding
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -32,6 +36,7 @@ class AddPhotoActivity : AppCompatActivity() {
     private lateinit var dbReference: DatabaseReference
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
+    private var user : FirebaseUser? = null
     private var statusAdd = false
     private lateinit var bitmap: Bitmap
     private var imageUri: Uri? = null
@@ -47,10 +52,12 @@ class AddPhotoActivity : AppCompatActivity() {
         dbReference = db.getReference("users")
         storage = FirebaseStorage.getInstance()
         storageRef = storage.getReference()
+        user = auth.currentUser
 
         val userIntent = intent.getParcelableExtra<User>(USER)
 
         binding.txtUsername.text = "Welcome, ${userIntent?.username}"
+
 
         binding.imgAddProfile.setOnClickListener {
             if (statusAdd){
@@ -62,7 +69,7 @@ class AddPhotoActivity : AppCompatActivity() {
         }
 
         binding.btnAddPhoto.setOnClickListener {
-                val ref = storageRef.child("images/${UUID.randomUUID()}")
+            val ref = storageRef.child("images/${UUID.randomUUID()}")
                 ref.putFile(imageUri!!)
                     .addOnSuccessListener{
                         ref.downloadUrl.addOnSuccessListener {
@@ -76,6 +83,20 @@ class AddPhotoActivity : AppCompatActivity() {
         }
 
         setupToolbar()
+    }
+
+    private fun inviteToPublicGroup(id : String, username: String) {
+        val invite : HashMap<String, String> = HashMap()
+        invite["time"] = System.currentTimeMillis().toString()
+        invite["uid"] = id
+        invite["username"] = username
+        val group = db.getReference("groups")
+        group.child(ALL_GROUP)
+            .child("member")
+            .child(id)
+            .setValue(invite)
+            .addOnSuccessListener {  }
+            .addOnFailureListener {  }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -130,13 +151,15 @@ class AddPhotoActivity : AppCompatActivity() {
                     val user : HashMap<Any, String> = HashMap()
 
                     user.apply{
-                        put("id", auth.currentUser?.uid ?: "null")
+                        put("id", auth.currentUser?.uid ?: "")
                         put("email", email)
                         put("username", username)
                         put("image", image)
                         put("onlineState", "online")
                         put("onTypingState", "noOne")
                     }
+
+                    inviteToPublicGroup(auth.currentUser?.uid ?: "", username)
 
                     val reference = db.getReference("users")
                     auth.currentUser?.uid.let { id ->

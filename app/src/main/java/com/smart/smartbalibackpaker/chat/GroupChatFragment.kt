@@ -95,7 +95,6 @@ class GroupChatFragment : Fragment() {
                 binding?.rvChatGroup?.layoutManager = LinearLayoutManager(context)
                 binding?.rvChatGroup?.setHasFixedSize(true)
                 binding?.rvChatGroup?.adapter = adapter
-                Log.d("hohohohoho", adapter.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {

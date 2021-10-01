@@ -46,7 +46,6 @@ class GroupChatActivity : AppCompatActivity() {
         setupMenu()
 
         binding.btnSendGroupChat.setOnClickListener {
-            Log.d("akuanakupn", groupId.toString())
             val message = binding.etGroupChatBox.text.toString()
             validateMessage(message)
         }
