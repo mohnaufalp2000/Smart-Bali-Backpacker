@@ -7,6 +7,7 @@ class StreamChatTabAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fr
 
     private val fragment = arrayOf(
         PersonalChatFragment(),
+        PublicGroupFragment(),
         GroupChatFragment()
     )
 
