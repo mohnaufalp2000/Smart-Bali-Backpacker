@@ -3,6 +3,7 @@ package com.smart.smartbalibackpaker.core.model.groupchat
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.chat.GroupChatActivity
+import com.smart.smartbalibackpaker.core.utils.Constant.ALL_GROUP
 import com.smart.smartbalibackpaker.databinding.ItemRowGroupBinding
 import java.util.*
 
@@ -22,6 +24,9 @@ class GroupAdapter(val context: Context, private val listChat: ArrayList<GroupDa
     class ListViewHolder(val binding: ItemRowGroupBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: GroupData) {
             val groupId = data.groupId
+            if(groupId == ALL_GROUP){
+                itemView.visibility = View.GONE
+            }
             with(binding) {
                 tvGroupTitle.text = data.groupTitle
                 Glide.with(itemView.context)

@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -33,6 +34,7 @@ class DashboardFragment : Fragment() {
     private var userId: String? = null
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
+    private var callbackManager = CallbackManager.Factory.create()
 
     private var myUid: String? = null
 
@@ -46,7 +48,11 @@ class DashboardFragment : Fragment() {
             R.string.tab_hotelvilla,
             R.string.tab_worshipplace
         )
+        const val FACEBOOK_EMAIL = "facebook_email"
+        const val FACEBOOK_NAME = "facebook_NAME"
+        const val FACEBOOK_IMAGE = "facebook_image"
     }
+
     override fun onStart() {
         checkOnlineState("online")
         super.onStart()
@@ -88,16 +94,19 @@ class DashboardFragment : Fragment() {
         user = auth.currentUser!!
         userId = auth.currentUser?.uid
 
+        val name = activity?.intent?.getStringExtra(FACEBOOK_NAME)
+        binding?.tvWelcomeUsername?.text = "Welcome $name"
+
         val query = dbReference.orderByChild("email").equalTo(user.email)
-        query.addValueEventListener(object : ValueEventListener{
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(ds in snapshot.children){
-                    val username = ""+ ds.child("username").value
+                for (ds in snapshot.children) {
+                    val username = "" + ds.child("username").value
                     val image = ds.child("image").value
 
                     binding?.tvWelcomeUsername?.text = "Welcome $username"
 
-                    if (image == ""){
+                    if (image == "") {
                         context?.let {
                             Glide.with(it)
                                 .load(R.drawable.account)
@@ -133,13 +142,13 @@ class DashboardFragment : Fragment() {
 
         val dashboardPlaceAdapter = activity?.let { DashboardPlaceAdapter(it) }
 
-            binding?.vpDashboard?.adapter = dashboardPlaceAdapter
-            TabLayoutMediator(
-                binding?.layoutTabLayout!!,
-                binding?.vpDashboard!!
-            ) { tab, position ->
-                tab.text = resources.getString(TAB_TITLES[position])
-            }.attach()
+        binding?.vpDashboard?.adapter = dashboardPlaceAdapter
+        TabLayoutMediator(
+            binding?.layoutTabLayout!!,
+            binding?.vpDashboard!!
+        ) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
 
         val imageList = ArrayList<SlideModel>() // Create image list
 
@@ -168,5 +177,6 @@ class DashboardFragment : Fragment() {
         imageSlider?.setImageList(imageList)
 
     }
+
 
 }

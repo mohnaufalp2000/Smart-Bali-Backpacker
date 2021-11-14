@@ -11,7 +11,10 @@
         <entry key="..\:/PROJECT SMART-BALI BACKPACKER/Mobile Apps/Smart-Bali-Backpacker/app/src/main/res/layout/activity_regist_first_form.xml" value="0.264" />
         <entry key="..\:/PROJECT SMART-BALI BACKPACKER/Mobile Apps/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_hotel_villa.xml" value="0.1" />
         <entry key="..\:/PROJECT SMART-BALI BACKPACKER/Mobile Apps/Smart-Bali-Backpacker/app/src/main/res/layout/item_grid_place.xml" value="0.1671195652173913" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_btn_green.xml" value="0.16666666666666666" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_chat_sender.xml" value="0.17314814814814813" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_main.xml" value="0.15" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/btn_facebook.xml" value="0.16666666666666666" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.18333333333333332" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/ic_baseline_group_add_24.xml" value="0.18333333333333332" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.18333333333333332" />
@@ -22,13 +25,14 @@
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_group_add_member.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_group_chat.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_group_info.xml" value="0.16666666666666666" />
-        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_main.xml" value="0.11413043478260869" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_onboarding.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_regist_first_form.xml" value="0.16666666666666666" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
-        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_guide.xml" value="0.1082427536231884" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_guide.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_personal_chat.xml" value="0.14266304347826086" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_public_group.xml" value="0.13043478260869565" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_search.xml" value="0.1" />
@@ -37,6 +41,7 @@
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_tourist_place.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/item_grid_place.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/item_row_group.xml" value="0.15172101449275363" />
+        <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/item_row_group_member.xml" value="0.14492753623188406" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/item_row_user.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/list_item.xml" value="0.1082427536231884" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/layout/row_chat_left.xml" value="0.1" />

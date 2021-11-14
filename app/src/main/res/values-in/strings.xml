@@ -76,4 +76,8 @@
     <string name="tempat_kedatangan">Tempat Kedatangan</string>
     <string name="guide">Pemandu</string>
     <string name="daftarkan_saya">Daftarkan Saya</string>
+    <string name="tab_publicgroupchat">Umum</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiYmFsaWJhY2twYWNrZXIiLCJhIjoiY2t1ZHNhNmV0MWQyNzJwbG0zYXJmajB4YyJ9.u4FIQJpvsXS5PJaqFOG7UQ</string>
+    <string name="facebook_app_id">419180736313160</string>
+    <string name="fb_login_protocol_scheme">fb419180736313160</string>
 </resources>

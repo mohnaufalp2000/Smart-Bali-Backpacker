@@ -76,4 +76,7 @@
     <string name="guide">Guide</string>
     <string name="daftarkan_saya">Register Me</string>
     <string name="tab_publicgroupchat">Public</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiYmFsaWJhY2twYWNrZXIiLCJhIjoiY2t1ZHNhNmV0MWQyNzJwbG0zYXJmajB4YyJ9.u4FIQJpvsXS5PJaqFOG7UQ</string>
+    <string name="facebook_app_id">419180736313160</string>
+    <string name="fb_login_protocol_scheme">fb419180736313160</string>
 </resources>

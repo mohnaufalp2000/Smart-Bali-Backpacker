@@ -6,8 +6,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class StreamChatTabAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
     private val fragment = arrayOf(
-        PersonalChatFragment(),
-        PublicGroupFragment(),
+//        PersonalChatFragment(),
+//        PublicGroupFragment(),
         GroupChatFragment()
     )
 

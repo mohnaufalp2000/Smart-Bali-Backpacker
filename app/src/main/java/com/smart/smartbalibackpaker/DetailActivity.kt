@@ -68,6 +68,7 @@ class DetailActivity : AppCompatActivity() {
         binding.btnRegisterMe.setOnClickListener {
             startActivity(Intent(this@DetailActivity, RegistFirstFormActivity::class.java))
         }
+
     }
 
     private fun createGroupChat() {
