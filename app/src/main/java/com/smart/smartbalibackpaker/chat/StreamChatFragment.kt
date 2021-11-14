@@ -24,8 +24,8 @@ class StreamChatFragment : Fragment() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.tab_personalchat,
-            R.string.tab_publicgroupchat,
+//            R.string.tab_personalchat,
+//            R.string.tab_publicgroupchat,
             R.string.tab_grupchat
         )
     }

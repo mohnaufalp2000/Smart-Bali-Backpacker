@@ -7,14 +7,22 @@ import android.util.Patterns
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.GraphRequest
+import com.facebook.login.LoginResult
 import com.google.firebase.auth.FirebaseAuth
 import com.smart.smartbalibackpaker.MainActivity
 import com.smart.smartbalibackpaker.R
+import com.smart.smartbalibackpaker.dashboard.DashboardFragment
 import com.smart.smartbalibackpaker.databinding.ActivityLoginBinding
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var dialog: AlertDialog
+    private var callbackManager = CallbackManager.Factory.create()
     private val binding by lazy {ActivityLoginBinding.inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +30,27 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+
+        binding.loginFacebook.setReadPermissions(listOf("email", "public_profile"))
+        binding.loginFacebook.registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                val graphRequest = GraphRequest.newMeRequest(result?.accessToken){`object`, response ->
+                    getFacebookData(`object`)
+                }
+                val param = Bundle()
+                param.putString("fields", "id,email,name")
+                graphRequest.parameters = param
+                graphRequest.executeAsync()
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onCancel() {
+            }
+
+            override fun onError(error: FacebookException?) {
+            }
+        })
 
         binding.apply{
             btnLogin.setOnClickListener {
@@ -35,6 +64,20 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         loginUser()
+    }
+
+    private fun getFacebookData(obj: JSONObject?){
+        val profilePic = "https://graph.facebook.com/${obj?.getString("id")}/picture?width=200&height=200"
+        val name = obj?.getString("name")
+        val email = obj?.getString("email")
+
+//        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//        intent.apply {
+//            putExtra(DashboardFragment.FACEBOOK_NAME, name)
+//            putExtra(DashboardFragment.FACEBOOK_IMAGE, profilePic)
+//            putExtra(DashboardFragment.FACEBOOK_EMAIL, email)
+//        }
+//        startActivity(intent)
     }
 
     private fun showRecoverPassDialog() {

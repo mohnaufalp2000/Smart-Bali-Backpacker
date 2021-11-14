@@ -7,10 +7,45 @@
     android:background="@drawable/bg_main"
     tools:context=".GuideFragment">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/guide_maps"
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/guide_maps"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context=".GuideFragment"-->
+<!--        android:name="com.google.android.gms.maps.SupportMapFragment"/>-->
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+        app:mapbox_cameraTargetLat="0"
+        app:mapbox_cameraTargetLng="118"
+        app:mapbox_cameraZoom="2.6"
+        />
+
+    <Button
+        android:id="@+id/btnNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:background="@color/txt_app"
+        android:text="Start Navigation"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Coming Soon"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textColor="@color/txt_app"-->
+<!--        android:fontFamily="@font/poppins_bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

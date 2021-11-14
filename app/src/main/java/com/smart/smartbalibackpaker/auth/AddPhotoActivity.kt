@@ -85,19 +85,6 @@ class AddPhotoActivity : AppCompatActivity() {
         setupToolbar()
     }
 
-    private fun inviteToPublicGroup(id : String, username: String) {
-        val invite : HashMap<String, String> = HashMap()
-        invite["time"] = System.currentTimeMillis().toString()
-        invite["uid"] = id
-        invite["username"] = username
-        val group = db.getReference("groups")
-        group.child(ALL_GROUP)
-            .child("member")
-            .child(id)
-            .setValue(invite)
-            .addOnSuccessListener {  }
-            .addOnFailureListener {  }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -158,8 +145,6 @@ class AddPhotoActivity : AppCompatActivity() {
                         put("onlineState", "online")
                         put("onTypingState", "noOne")
                     }
-
-                    inviteToPublicGroup(auth.currentUser?.uid ?: "", username)
 
                     val reference = db.getReference("users")
                     auth.currentUser?.uid.let { id ->

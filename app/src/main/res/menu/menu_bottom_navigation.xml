@@ -18,7 +18,7 @@
         android:title="@string/guide"/>
 
     <item
-        android:id="@+id/navigation_stream_chat"
+        android:id="@+id/navigation_group_chat"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
         android:title="@string/chat"/>

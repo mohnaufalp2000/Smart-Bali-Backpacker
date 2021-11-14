@@ -7,7 +7,7 @@ class ConfigNetwork {
     companion object {
         fun getRetrofit(): TourismService {
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://backpacker.igsindonesia.org/data/")
+                .baseUrl("http://smart-balibackpacker.com/data/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
