@@ -45,7 +45,7 @@ class RegistFirstFormActivity : AppCompatActivity() {
                     }
                     listArrivalPlace.text.toString().trim().isEmpty() -> {
                         listArrivalPlace.error = "Tempat kedatangan harus dipilih"
-                    } else -> startActivity(Intent(this@RegistFirstFormActivity, DashboardFragment::class.java))
+                    } else -> startActivity(Intent(this@RegistFirstFormActivity, RegistSecondFormActivity::class.java))
                 }
             }
         }
