@@ -14,7 +14,7 @@
             android:id="@+id/toolbar_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_primary_dark"
+            android:background="@android:color/transparent"
             app:elevation="0dp"
             android:fitsSystemWindows="true"
             app:liftOnScroll="true">
@@ -65,39 +65,108 @@
                         app:layout_constraintTop_toTopOf="@+id/iv_welcome_photo"
                         tools:text="July 26th, 2021" />
 
-                    <com.denzcoskun.imageslider.ImageSlider
-                        android:id="@+id/image_slider"
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/sv_travel_place"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/bg_searchbox"
+                        android:elevation="10dp"
+                        android:theme="@style/SearchViewStyle"
+                        app:closeIcon="@drawable/ic_close"
+                        app:iconifiedByDefault="false"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_favorite_list"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_welcome_username"
+                        app:queryHint="@string/search_here"
+                        app:searchIcon="@null" />
+
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:id="@+id/card_image_slider"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginEnd="24dp"-->
+<!--                        app:cardCornerRadius="24dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/text_view_popular">-->
+
+<!--                        <com.denzcoskun.imageslider.ImageSlider-->
+<!--                            android:id="@+id/image_slider"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="100dp"-->
+<!--                            app:iss_auto_cycle="true"-->
+<!--                            app:iss_delay="0"-->
+<!--                            app:iss_period="1000"-->
+<!--                            app:iss_title_background="@android:color/transparent"-->
+<!--                            tools:background="@tools:sample/backgrounds/scenic" />-->
+
+<!--                    </androidx.cardview.widget.CardView>-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/text_view_popular"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginTop="24dp"-->
+<!--                        android:fontFamily="@font/poppins_medium"-->
+<!--                        android:text="Tempat Populer"-->
+<!--                        android:textColor="@color/txt_app"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/iv_welcome_photo" />-->
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/layout_tab_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:layout_marginTop="20dp"
-                        app:iss_auto_cycle="true"
-                        app:iss_delay="0"
-                        app:iss_period="1000"
-                        app:iss_title_background="@android:color/transparent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="12dp"
+                        android:background="@android:color/transparent"
+                        android:paddingHorizontal="16dp"
+                        app:layout_collapseMode="pin"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_welcome_photo"
-                        tools:background="@tools:sample/backgrounds/scenic" />
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_title_daftar"
+                        app:tabIndicator="@drawable/bg_tab_indicator"
+                        app:tabIndicatorColor="@color/tab_indicator_color"
+                        app:tabIndicatorFullWidth="true"
+                        app:tabIndicatorGravity="center"
+                        app:tabIndicatorHeight="34dp"
+                        app:tabMode="scrollable"
+                        app:tabSelectedTextColor="@color/txt_selected_tab_color"
+                        app:tabTextAppearance="@style/TextAppearance.App.Button"
+                        app:tabTextColor="@color/txt_unselected_tab_color" />
+
+                    <TextView
+                        android:id="@+id/text_view_title_daftar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Pilih tempat wisatamu"
+                        android:textColor="@color/txt_app"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sv_travel_place" />
+
+                    <ImageView
+                        android:id="@+id/btn_favorite_list"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="24dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/sv_travel_place"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/sv_travel_place"
+                        app:srcCompat="@drawable/favorite" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/layout_tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingHorizontal="16dp"
-                    app:layout_collapseMode="pin"
-                    android:layout_gravity="bottom"
-                    app:tabIndicator="@drawable/bg_tab_indicator"
-                    app:tabIndicatorColor="@color/bg_blue_dark"
-                    app:tabIndicatorFullWidth="true"
-                    app:tabIndicatorGravity="center"
-                    app:tabIndicatorHeight="34dp"
-                    app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/white"
-                    app:tabTextAppearance="@style/TextAppearance.App.Button"
-                    app:tabTextColor="#7A7A7A" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -106,7 +175,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="60dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

@@ -10,4 +10,8 @@ interface TourismDataSource {
     fun getAllTourism(placeType: String): LiveData<Resource<PagedList<TourismDataEntity>>>
 
     fun getDetailTourism(placeId: Int): LiveData<Resource<TourismDataEntity>>
+
+    fun setPlaceFavorite(place: TourismDataEntity, state: Boolean)
+
+    fun getPlacesFavorite() : LiveData<List<TourismDataEntity>>
 }

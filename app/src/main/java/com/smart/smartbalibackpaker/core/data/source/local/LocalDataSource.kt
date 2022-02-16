@@ -21,6 +21,13 @@ class LocalDataSource private constructor(private val movieDao: TourismDao) {
     fun getDetailPlace(placeId: Int): LiveData<TourismDataEntity> =
         movieDao.getDetailPlace(placeId)
 
+    fun setPlaceFavorite(place: TourismDataEntity, newState: Boolean){
+        place.isFavorite = newState
+        movieDao.updatePlace(place)
+    }
+
+    fun getPlacesFavorite() : LiveData<List<TourismDataEntity>> = movieDao.getFavoritePlace()
+
     companion object {
         private var INSTANCE: LocalDataSource? = null
 

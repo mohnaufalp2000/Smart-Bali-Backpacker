@@ -16,6 +16,9 @@ interface TourismDao {
     @Query("SELECT * FROM tourism_table WHERE type = :placeType")
     fun getPlace(placeType: String): DataSource.Factory<Int, TourismDataEntity>
 
+    @Query("SELECT * FROM tourism_table WHERE isFavorite = 1")
+    fun getFavoritePlace(): LiveData<List<TourismDataEntity>>
+
     @Query("SELECT * FROM tourism_table WHERE id = :placeId")
     fun getDetailPlace(placeId: Int): LiveData<TourismDataEntity>
 }

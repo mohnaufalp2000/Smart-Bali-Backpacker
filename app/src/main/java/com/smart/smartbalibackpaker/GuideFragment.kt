@@ -1,196 +1,107 @@
 package com.smart.smartbalibackpaker
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.BounceInterpolator
-
-import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.maps.MapView
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
-import com.mapbox.mapboxsdk.style.layers.LineLayer
-import com.mapbox.mapboxsdk.style.layers.Property
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
-import com.mapbox.mapboxsdk.utils.BitmapUtils
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 import com.smart.smartbalibackpaker.databinding.FragmentGuideBinding
-import android.widget.Toast
-import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
-import com.mapbox.geojson.Point
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.location.LocationComponent
-import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
-import com.mapbox.mapboxsdk.location.LocationComponentOptions
-import com.mapbox.mapboxsdk.location.modes.CameraMode
-import com.mapbox.mapboxsdk.location.modes.RenderMode
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 
-class GuideFragment : Fragment() {
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import com.google.maps.android.PolyUtil
+import com.smart.smartbalibackpaker.core.model.ResponseRoute
+import com.smart.smartbalibackpaker.core.data.source.remote.ConfigNetwork
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
+class GuideFragment : Fragment(), OnMapReadyCallback {
 
     private var binding: FragmentGuideBinding? = null
-    private var mapView: MapView? = null
-    private lateinit var mapboxMap: MapboxMap
-    private lateinit var symbolManager: SymbolManager
-    private lateinit var locationComponent: LocationComponent
-    private lateinit var mylocation: LatLng
-    private lateinit var permissionsManager: PermissionsManager
-//    private var currentRoute: DirectionsRoute? = null
-//    private lateinit var navigationMapRoute: NavigationMapRoute
-    private lateinit var origin: Point
-
-
-    companion object {
-        private const val ICON_ID = "ICON_ID"
-    }
+    private val apiKey = "AIzaSyBKQuKAz4cstvm-nNmnYwYJEmSSWEzCxmU"
+    private val origin = LatLng(-6.175110, 106.865039) // Jakarta
+    private val destination = LatLng(-6.197301,106.795951); // Cirebon
+    private lateinit var googleMap: GoogleMap
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Mapbox.getInstance(requireActivity(), getString(R.string.mapbox_access_token))
         binding = FragmentGuideBinding.inflate(layoutInflater, container, false)
-
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mapView = binding?.mapView
-        mapView?.onCreate(savedInstanceState)
-        mapView?.getMapAsync { mapboxMap ->
-            this.mapboxMap = mapboxMap
-            mapboxMap.setStyle(Style.MAPBOX_STREETS) { style ->
-//                navigationMapRoute = NavigationMapRoute(
-//                    null,
-//                    mapView!!,
-//                    mapboxMap,
-//                    R.style.NavigationMapRoute
-//                )
-                symbolManager = SymbolManager(mapView!!, mapboxMap, style)
-                symbolManager.iconAllowOverlap = true
-                style.addImage(
-                    ICON_ID,
-                    BitmapFactory.decodeResource(resources, R.drawable.mapbox_marker_icon_default)
-                )
-                showLocation()
-                showMyLocation(style)
-                showNavigation()
-            }
-
-        }
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        actionRoute()
     }
 
-    private fun showNavigation() {
-//            val simulateRoute = true
-//
-//            val options = NavigationLauncherOptions.builder()
-//                .directionsRoute(currentRoute)
-//                .shouldSimulateRoute(simulateRoute)
-//                .build()
-//
-//            NavigationLauncher.startNavigation(requireActivity(), options)
+    private fun actionRoute() {
+        val startLocation = "${origin.latitude}, ${origin.longitude}"
+        val endLocation = "${destination.latitude}, ${destination.longitude}"
+        ConfigNetwork
+            .getRoutesNetwork()
+            .requestRoute(startLocation, endLocation, apiKey)
+            .enqueue(object: Callback<ResponseRoute>{
+                override fun onResponse(
+                    call: Call<ResponseRoute>,
+                    response: Response<ResponseRoute>
+                ) {
+                    if(response.isSuccessful){
+                        val dataDirection = response.body()
+                        val dataLegs = dataDirection?.routes?.get(0)?.legs?.get(0)
+                        val polylinePoint = dataDirection?.routes?.get(0)?.overviewPolyline?.points
+                        val decodePath = PolyUtil.decode(polylinePoint)
 
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun showMyLocation(style: Style) {
-        if (PermissionsManager.areLocationPermissionsGranted(context)) {
-            val locationComponentOptions = LocationComponentOptions.builder(requireContext())
-                .pulseEnabled(true)
-                .pulseColor(Color.BLUE)
-                .pulseAlpha(.4f)
-                .pulseInterpolator(BounceInterpolator())
-                .build()
-            val locationComponentActivationOptions = LocationComponentActivationOptions
-                .builder(requireContext(), style)
-                .locationComponentOptions(locationComponentOptions)
-                .build()
-            locationComponent = mapboxMap.locationComponent
-            locationComponent.activateLocationComponent(locationComponentActivationOptions)
-            locationComponent.isLocationComponentEnabled = true
-            locationComponent.cameraMode = CameraMode.TRACKING
-            locationComponent.renderMode = RenderMode.COMPASS
-            mylocation = LatLng(locationComponent.lastKnownLocation?.latitude as Double, locationComponent.lastKnownLocation?.longitude as Double)
-            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mylocation, 12.0))
-        } else {
-            permissionsManager = PermissionsManager(object : PermissionsListener {
-                override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-                    Toast.makeText(context, "Anda harus mengizinkan location permission untuk menggunakan aplikasi ini", Toast.LENGTH_SHORT).show()
-                }
-                override fun onPermissionResult(granted: Boolean) {
-                    if (granted) {
-                        mapboxMap.getStyle { style ->
-                            showMyLocation(style)
+                        // Gambar garis antar dua tempat di Maps
+                        googleMap.apply {
+                            addPolyline(PolylineOptions()
+                                .addAll(decodePath)
+                                .width(8.0F)
+                                .color(Color.argb(255, 56, 167, 252))
+                            )
+                            addMarker(MarkerOptions().position(origin).title("Lokasi Awal"))
+                            addMarker(MarkerOptions().position(destination).title("Lokasi Akhir"))
                         }
-                    } else {
-                        activity?.finish()
+
+                        // Mengarahkan layar ke jalur dari tempat awal sampai tempat akhir
+                        val latLongBuilder = LatLngBounds.Builder()
+                        latLongBuilder.apply {
+                            include(origin)
+                            include(destination)
+                        }
+                        val bounds = latLongBuilder.build()
+                        val width = resources.displayMetrics.widthPixels
+                        val height = resources.displayMetrics.heightPixels
+                        val paddingMap = width * 0.2
+                        val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap.toInt())
+                        googleMap.animateCamera(cameraUpdate)
                     }
                 }
+
+                override fun onFailure(call: Call<ResponseRoute>, t: Throwable) {
+                }
             })
-            permissionsManager.requestLocationPermissions(requireActivity())
-        }
     }
 
-
-    private fun showLocation() {
-        val location = LatLng(-7.325768251326577, 112.79321802428606)
-        symbolManager.create(
-            SymbolOptions()
-                .withLatLng(LatLng(location.latitude, location.longitude))
-                .withIconImage(ICON_ID)
-                .withIconSize(1.5f)
-                .withIconOffset(arrayOf(0f, -1.5f))
-                .withTextField("D'Paragon")
-                .withTextHaloColor("rgba(255, 255, 255, 100)")
-                .withTextHaloWidth(5.0f)
-                .withTextAnchor("top")
-                .withTextOffset(arrayOf(0f, 1.5f))
-                .withDraggable(true)
-        )
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16.0))
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mapView?.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView?.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView?.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView?.onStop()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView?.onLowMemory()
+    override fun onMapReady(p0: GoogleMap) {
+        googleMap = p0
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView?.onDestroy()
         binding = null
     }
 }

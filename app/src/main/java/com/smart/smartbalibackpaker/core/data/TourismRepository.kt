@@ -32,8 +32,8 @@ class TourismRepository private constructor(
             }
 
             override fun shouldFetch(data: PagedList<TourismDataEntity>?): Boolean =
-//                data == null || data.isEmpty()
-                true
+                data == null || data.isEmpty()
+//                true
             override fun createCall(): LiveData<ApiResponse<List<DataItem>>> {
                 return when (placeType) {
                     "tour" -> {
@@ -97,6 +97,14 @@ class TourismRepository private constructor(
                 localDataSource.updatePlace(tourismDetail)
             }
         }.asLiveData()
+    }
+
+    override fun setPlaceFavorite(place: TourismDataEntity, state: Boolean) {
+        appExecutors.diskIO().execute { localDataSource.setPlaceFavorite(place, state) }
+    }
+
+    override fun getPlacesFavorite(): LiveData<List<TourismDataEntity>> {
+        return localDataSource.getPlacesFavorite()
     }
 
     companion object {

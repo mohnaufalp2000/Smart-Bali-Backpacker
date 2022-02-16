@@ -1,5 +1,6 @@
 package com.smart.smartbalibackpaker.dashboard
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,11 +12,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.smart.smartbalibackpaker.FavoriteActivity
 import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.databinding.FragmentDashboardBinding
 import java.text.SimpleDateFormat
@@ -34,7 +35,6 @@ class DashboardFragment : Fragment() {
     private var userId: String? = null
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding
-    private var callbackManager = CallbackManager.Factory.create()
 
     private var myUid: String? = null
 
@@ -43,14 +43,11 @@ class DashboardFragment : Fragment() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.tab_allplace,
+//            R.string.tab_allplace,
             R.string.tab_touristplace,
             R.string.tab_hotelvilla,
             R.string.tab_worshipplace
         )
-        const val FACEBOOK_EMAIL = "facebook_email"
-        const val FACEBOOK_NAME = "facebook_NAME"
-        const val FACEBOOK_IMAGE = "facebook_image"
     }
 
     override fun onStart() {
@@ -94,9 +91,6 @@ class DashboardFragment : Fragment() {
         user = auth.currentUser!!
         userId = auth.currentUser?.uid
 
-        val name = activity?.intent?.getStringExtra(FACEBOOK_NAME)
-        binding?.tvWelcomeUsername?.text = "Welcome $name"
-
         val query = dbReference.orderByChild("email").equalTo(user.email)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -134,7 +128,6 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //TODO -> REMOVE AFTER SIMULATING LAYOUT
         val dateFormat = SimpleDateFormat("dd/M/yyyy")
         val currentDate = dateFormat.format(Date())
@@ -173,10 +166,13 @@ class DashboardFragment : Fragment() {
                 ScaleTypes.CENTER_CROP
             )
         )
-        val imageSlider = binding?.imageSlider
-        imageSlider?.setImageList(imageList)
+
+        binding?.btnFavoriteList?.setOnClickListener {
+            activity?.startActivity(Intent(context, FavoriteActivity::class.java))
+        }
+//        val imageSlider = binding?.imageSlider
+//        imageSlider?.setImageList(imageList)
 
     }
-
-
 }
+

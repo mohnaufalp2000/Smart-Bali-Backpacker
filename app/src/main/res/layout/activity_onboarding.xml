@@ -26,6 +26,8 @@
         app:layout_constraintBottom_toTopOf="@+id/layout_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:piv_selectedColor="@color/circle_selected_color"
+        app:piv_unselectedColor="@color/circle_unselected_color"
         app:piv_animationType="worm"
         app:piv_radius="7dp"
         app:piv_strokeWidth="5dp"

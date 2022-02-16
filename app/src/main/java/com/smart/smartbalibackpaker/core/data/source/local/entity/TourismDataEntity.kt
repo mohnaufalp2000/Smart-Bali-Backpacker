@@ -11,16 +11,17 @@ import kotlinx.parcelize.Parcelize
 data class TourismDataEntity(
     @PrimaryKey
     @NonNull
-    val id: Int? = null,
-    val thumbnail: String? = null,
-    val address: String? = null,
-    val updatedAt: String? = null,
-    val latitude: String? = null,
-    val longtitude: String? = null,
-    val createdAt: String? = null,
-    val title: String? = null,
-    val type: String? = null,
-    val slug: String? = null,
-    val desc: String? = null,
-//    val pictures: List<String?>? = null,
+    var id: Int? = null,
+    var thumbnail: String? = null,
+    var address: String? = null,
+    var updatedAt: String? = null,
+    var latitude: String? = null,
+    var longtitude: String? = null,
+    var createdAt: String? = null,
+    var title: String? = null,
+    var type: String? = null,
+    var slug: String? = null,
+    var desc: String? = null,
+    var isFavorite: Boolean = false
+//    var pictures: List<String?>? = null,
 ) : Parcelable

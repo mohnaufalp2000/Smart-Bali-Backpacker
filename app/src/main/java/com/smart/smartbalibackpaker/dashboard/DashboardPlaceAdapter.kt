@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class DashboardPlaceAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
     private val fragment = arrayOf(
-        AllPlaceFragment(),
+//        AllPlaceFragment(),
         TouristPlaceFragment(),
         HotelVillaFragment(),
         WorshipPlaceFragment()
