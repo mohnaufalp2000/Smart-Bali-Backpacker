@@ -16,8 +16,11 @@ class DetailPlaceViewModel(private val tourismRepository: TourismRepository) : V
         this.placeId.value = placeId
     }
 
-
     var detailPlace: LiveData<Resource<TourismDataEntity>> = Transformations.switchMap(placeId) {
         tourismRepository.getDetailTourism(it)
+    }
+
+    fun setFavorite(place: TourismDataEntity, state: Boolean){
+        tourismRepository.setPlaceFavorite(place, state)
     }
 }

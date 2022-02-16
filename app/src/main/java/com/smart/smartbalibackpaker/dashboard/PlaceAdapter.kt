@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.smart.smartbalibackpaker.DetailActivity
+import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
 import com.smart.smartbalibackpaker.databinding.ItemGridPlaceBinding
 
@@ -25,6 +26,8 @@ class PlaceAdapter : PagedListAdapter<TourismDataEntity, PlaceAdapter.ListViewHo
 
             Glide.with(itemView.context)
                 .load("http://backpacker.igsindonesia.org/public/storage/pictures/thumbnail/${place.thumbnail}")
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
                 .apply(RequestOptions().transform(RoundedCorners(10)).override(90, 120))
                 .into(imgPhoto)
             itemView.setOnClickListener {

@@ -33,12 +33,12 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
     private var userId: String? = null
-    private lateinit var imageUri : Uri
+    private lateinit var imageUri: Uri
     private lateinit var bitmap: Bitmap
-    private lateinit var removeBtn : ImageView
-    private lateinit var removeTxt : TextView
+    private lateinit var removeBtn: ImageView
+    private lateinit var removeTxt: TextView
     private var usernameDB = ""
-    private var imageDB : Any? = null
+    private var imageDB: Any? = null
     var img = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,13 +56,13 @@ class EditProfileActivity : AppCompatActivity() {
         val query = dbReference.orderByChild("email").equalTo(user?.email)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(ds in snapshot.children){
-                    usernameDB = ""+ ds.child("username").value
+                for (ds in snapshot.children) {
+                    usernameDB = "" + ds.child("username").value
                     imageDB = ds.child("image").value
 
                     binding.etUsername.setText(usernameDB)
 
-                    if (imageDB == ""){
+                    if (imageDB == "") {
                         Glide.with(applicationContext)
                             .load(R.drawable.account)
                             .into(binding.imgPhoto)
@@ -90,13 +90,13 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         binding.btnUpdateProfile.setOnClickListener {
-            if (binding.imgPhoto.drawable.constantState?.equals(resources.getDrawable(R.drawable.account).constantState) == true){
+            if (binding.imgPhoto.drawable.constantState?.equals(resources.getDrawable(R.drawable.account).constantState) == true) {
                 removeBtn.visibility = View.GONE
                 removeTxt.visibility = View.GONE
                 binding.imgPhoto.setImageResource(R.drawable.account)
             }
 
-            val imgUri : Uri? = when{
+            val imgUri: Uri? = when {
                 ::imageUri.isInitialized -> imageUri
                 else -> null
             }
@@ -104,7 +104,7 @@ class EditProfileActivity : AppCompatActivity() {
             val ref = storageRef.child("images/${UUID.randomUUID()}")
             if (imgUri != null) {
                 ref.putFile(imgUri)
-                    .addOnSuccessListener{
+                    .addOnSuccessListener {
                         ref.downloadUrl.addOnSuccessListener {
                             img = it.toString()
                         }
@@ -112,22 +112,18 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             val username = binding.etUsername.text.toString()
-            if (username == usernameDB){
-                Toast.makeText(this, "Please Insert Your New Data", Toast.LENGTH_LONG).show()
-            } else {
-                val user : HashMap<String, Any> = HashMap()
+            val user: HashMap<String, Any> = HashMap()
 
-                user.put("username", username)
-                user.put("image", img)
+            user.put("username", username)
+            user.put("image", img)
 
 
-                auth.currentUser?.uid.let { id ->
-                    if (id != null) {
-                        dbReference.child(id).updateChildren(user)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Succesful update data", Toast.LENGTH_LONG).show()
-                            }
-                    }
+            auth.currentUser?.uid.let { id ->
+                if (id != null) {
+                    dbReference.child(id).updateChildren(user)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Succesful update data", Toast.LENGTH_LONG).show()
+                        }
                 }
             }
         }
@@ -162,8 +158,8 @@ class EditProfileActivity : AppCompatActivity() {
         dialogBuilder.apply {
             setTitle(getString(R.string.choose))
             setView(dialogLayout)
-            setNegativeButton("Cancel") {
-                    dialog, _ -> dialog.dismiss()
+            setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
             }
         }
 
@@ -175,7 +171,7 @@ class EditProfileActivity : AppCompatActivity() {
         val cameraBtn = dialogLayout.findViewById<ImageView>(R.id.img_camera)
         removeTxt = dialogLayout.findViewById<TextView>(R.id.txt_remove)
 
-        if (binding.imgPhoto.drawable.constantState?.equals(resources.getDrawable(R.drawable.account).constantState) == true){
+        if (binding.imgPhoto.drawable.constantState?.equals(resources.getDrawable(R.drawable.account).constantState) == true) {
             removeBtn.visibility = View.GONE
             removeTxt.visibility = View.GONE
         }

@@ -8,7 +8,7 @@ import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEnt
 
 @Database(
     entities = [TourismDataEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class TourismDatabase : RoomDatabase() {

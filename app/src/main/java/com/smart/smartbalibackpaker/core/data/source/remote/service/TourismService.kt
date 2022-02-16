@@ -1,4 +1,4 @@
-package com.smart.smartbalibackpaker.core.network
+package com.smart.smartbalibackpaker.core.data.source.remote.service
 
 import com.smart.smartbalibackpaker.core.data.source.remote.response.Place
 import com.smart.smartbalibackpaker.core.data.source.remote.response.TourismResponse

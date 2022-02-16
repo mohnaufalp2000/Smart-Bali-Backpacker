@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import com.smart.smartbalibackpaker.core.data.source.remote.response.DataItem
 import com.smart.smartbalibackpaker.core.data.source.remote.response.Place
 import com.smart.smartbalibackpaker.core.data.source.remote.response.TourismResponse
-import com.smart.smartbalibackpaker.core.network.ConfigNetwork
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

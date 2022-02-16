@@ -11,23 +11,11 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
-    <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.smart.smartbalibackpaker.SearchFragment"
-        android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_search" />
-
-<!--    <fragment-->
+    <!--    <fragment-->
 <!--        android:id="@+id/navigation_stream_chat"-->
 <!--        android:name="com.smart.smartbalibackpaker.chat.StreamChatFragment"-->
 <!--        android:label="fragment_dashboard"-->
 <!--        tools:layout="@layout/fragment_stream_chat" />-->
-
-    <fragment
-        android:id="@+id/navigation_group_chat"
-        android:name="com.smart.smartbalibackpaker.chat.GroupChatFragment"
-        android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_stream_chat" />
 
     <fragment
         android:id="@+id/navigation_setting"
@@ -39,5 +27,10 @@
         android:name="com.smart.smartbalibackpaker.GuideFragment"
         android:label="fragment_guide"
         tools:layout="@layout/fragment_guide" />
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.smart.smartbalibackpaker.chat.StreamChatFragment"
+        android:label="fragment_stream_chat"
+        tools:layout="@layout/fragment_stream_chat" />
 
 </navigation>
