@@ -61,7 +61,7 @@ class GroupChatAdapter(
                 for(ds in snapshot.children){
                     val username = "${ds.child("username").value}"
 
-                    holder.usernameUser.text = username
+//                    holder.usernameUser.text = username
                 }
             }
 

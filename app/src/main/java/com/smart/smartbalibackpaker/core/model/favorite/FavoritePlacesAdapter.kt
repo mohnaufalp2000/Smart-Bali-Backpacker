@@ -36,7 +36,7 @@ class FavoritePlacesAdapter : RecyclerView.Adapter<FavoritePlacesAdapter.ListVie
                 tvLocationPlace.text = dataPlace.address
 
                 Glide.with(itemView.context)
-                    .load("http://backpacker.igsindonesia.org/public/storage/pictures/thumbnail/${dataPlace.thumbnail}")
+                    .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${dataPlace.thumbnail}")
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .apply(RequestOptions().transform(RoundedCorners(10)).override(90, 120))

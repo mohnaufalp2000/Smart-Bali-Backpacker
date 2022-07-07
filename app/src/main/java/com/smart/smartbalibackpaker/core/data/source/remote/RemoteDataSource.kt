@@ -3,9 +3,8 @@ package com.smart.smartbalibackpaker.core.data.source.remote
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.smart.smartbalibackpaker.core.data.source.remote.response.DataItem
-import com.smart.smartbalibackpaker.core.data.source.remote.response.Place
-import com.smart.smartbalibackpaker.core.data.source.remote.response.TourismResponse
+import com.smart.smartbalibackpaker.core.data.source.local.entity.AccomDataEntity
+import com.smart.smartbalibackpaker.core.data.source.remote.response.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +50,83 @@ class RemoteDataSource {
                 }
             })
         return listDetailTourism
+    }
+
+    fun getUploadResult(email: String?,
+                        nama: String?,
+                        noHp: String?,
+                        tglDatang: String?,
+                        tglPergi: String?,
+                        tmpDatang: String?,
+                        akomodasi: String?,
+                        hotel: String?,
+                        tmpWisata: String?): LiveData<ApiResponse<ResponseAction>> {
+        val listDetails = MutableLiveData<ApiResponse<ResponseAction>>()
+        ConfigNetwork.getRetrofit().addRecordBackpacker(
+            email ?: "",
+//            nama ?: "",
+            noHp ?: "",
+            tmpDatang ?: "",
+            tglDatang ?: "",
+            tglPergi ?: "",
+            tmpWisata?: "",
+            hotel ?: "",
+            akomodasi ?: ""
+            ).enqueue(object : Callback<ResponseAction> {
+            override fun onFailure(call: Call<ResponseAction>, t: Throwable) {
+                val data = ResponseAction(
+                    message = "Failed",
+                    isSuccess = false
+                )
+//                    BackpackerRequest(
+//                    email = "email",
+//                    nama = "nama",
+//                    noHp = "hp",
+//                    tglDatang = "tgldtg",
+//                    tglPergi = "tglper",
+//                    tmpDatang = "tmpdata",
+//                    akomodasi = "acc",
+//                    hotel = "hotel",
+//                    tmpWisata = "tmpwisata"
+//                )
+                listDetails.postValue(ApiResponse.success(data))
+            }
+
+            override fun onResponse(
+                call: Call<ResponseAction>,
+                response: Response<ResponseAction>
+            ) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    val data = ResponseAction(
+                        message = "Data berhasil disimpan",
+                        isSuccess = true
+                    )
+                    listDetails.postValue(ApiResponse.success(data))
+//                    if (body.toString() == "[]") {
+//                        Toast.makeText(context, "Data not found", Toast.LENGTH_SHORT).show()
+//                    }
+                }
+            }
+        })
+        return listDetails
+    }
+
+    fun getAccom(): LiveData<ApiResponse<List<DataItemAllAccom>>> {
+        val listPlaces = MutableLiveData<ApiResponse<List<DataItemAllAccom>>>()
+        ConfigNetwork.getRetrofit().getAccom().enqueue(object : Callback<AllAccomResponse> {
+            override fun onResponse(call: Call<AllAccomResponse>, response: Response<AllAccomResponse>) {
+                if (response.isSuccessful) {
+                    val body = response.body()?.data
+                    listPlaces.postValue(ApiResponse.success(body as List<DataItemAllAccom>))
+                }
+            }
+
+            override fun onFailure(call: Call<AllAccomResponse>, t: Throwable) {
+                Log.d("Response", t.toString())
+            }
+        })
+        return listPlaces
     }
 
     companion object {

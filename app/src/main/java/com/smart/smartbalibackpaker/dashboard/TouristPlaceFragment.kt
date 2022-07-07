@@ -64,8 +64,9 @@ class TouristPlaceFragment : Fragment() {
     }
 
     private fun getTouristPlaceData() {
+        Log.d("INIDATA1", "KEPANGGIL")
         placeViewModel.getPlaces("tour").observe(viewLifecycleOwner, {
-            Log.d("INI DATA1", it.data.toString())
+            Log.d("INIDATA2", it.data.toString())
 
             if (it != null) {
                 when (it.status) {

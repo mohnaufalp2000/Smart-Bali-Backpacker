@@ -44,6 +44,7 @@ class SettingFragment : Fragment() {
         user = auth.currentUser!!
         userId = auth.currentUser?.uid
 
+        binding!!.txtViewEmail.text = user.email
         val query = dbReference.orderByChild("email").equalTo(user.email)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
