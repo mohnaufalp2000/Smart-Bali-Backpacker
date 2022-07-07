@@ -24,6 +24,12 @@
         android:theme="@style/Theme.SmartBaliBackpaker"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".registration.ChooseAccomActivity"
+            android:exported="true" />
+        <activity
+            android:name=".registration.ChoosePlaceActivity"
+            android:exported="true" />
+        <activity
             android:name=".FavoriteActivity"
             android:exported="true" />
         <activity

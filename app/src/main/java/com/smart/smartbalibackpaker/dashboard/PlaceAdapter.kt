@@ -25,7 +25,7 @@ class PlaceAdapter : PagedListAdapter<TourismDataEntity, PlaceAdapter.ListViewHo
             tvLocation.text = place.address
 
             Glide.with(itemView.context)
-                .load("http://backpacker.igsindonesia.org/public/storage/pictures/thumbnail/${place.thumbnail}")
+                .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${place.thumbnail}")
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .apply(RequestOptions().transform(RoundedCorners(10)).override(90, 120))

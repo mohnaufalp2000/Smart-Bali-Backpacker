@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Backpacker's"
+        android:hint="Nama Backpacker"
         app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Phone Number"
+        android:hint="No. Telp"
         app:startIconDrawable="@drawable/ic_baseline_email_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +75,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_regist_phone"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -88,13 +89,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Arrival Date"
+        android:hint="Tgl Kedatangan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_regist_phone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_regist_fill_date1"
-            android:inputType="none"
+            android:inputType="date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -108,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Until Date"
+        android:hint="Tgl Kepulangan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_regist_phone">
 
@@ -116,7 +117,7 @@
             android:id="@+id/et_regist_fill_date2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
+            android:inputType="date"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +126,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="until"
+        android:text="hingga"
         android:textColor="@color/txt_app"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/et_regist_date1"
@@ -140,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Select Dates"
+        android:text="Pilih tanggal"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:textAllCaps="false"
@@ -151,6 +152,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_regist_date1" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -166,9 +168,52 @@
             android:id="@+id/list_arrival_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_regist_budget"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="50dp"
+        android:hint="Target total harga tiket masuk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:startIconDrawable="@drawable/ic_wallet">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_regist_budget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_budget_alloc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:text="Alokasi biaya tiket masuk :"
+        app:layout_constraintBottom_toTopOf="@+id/et_regist_budget"
+        app:layout_constraintStart_toStartOf="@+id/et_regist_budget" />
+
+    <TextView
+        android:id="@+id/et_budget_alloc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="Rp. 0"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_budget_alloc"
+        app:layout_constraintStart_toEndOf="@+id/tv_budget_alloc"
+        app:layout_constraintTop_toTopOf="@+id/tv_budget_alloc" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next_register"

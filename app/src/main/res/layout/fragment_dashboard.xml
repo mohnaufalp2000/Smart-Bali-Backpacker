@@ -51,7 +51,7 @@
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/tv_welcome_date"
                         app:layout_constraintTop_toBottomOf="@+id/tv_welcome_date"
-                        tools:text="Welcome, Mr. Luthfirrohman" />
+                        android:text="Welcome, Mr. Luthfirrohman" />
 
                     <TextView
                         android:id="@+id/tv_welcome_date"

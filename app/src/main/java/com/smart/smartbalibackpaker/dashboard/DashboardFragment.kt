@@ -98,7 +98,7 @@ class DashboardFragment : Fragment() {
                     val username = "" + ds.child("username").value
                     val image = ds.child("image").value
 
-                    binding?.tvWelcomeUsername?.text = "Welcome $username"
+//                    binding?.tvWelcomeUsername?.text = "Welcome $username"
 
                     if (image == "") {
                         context?.let {

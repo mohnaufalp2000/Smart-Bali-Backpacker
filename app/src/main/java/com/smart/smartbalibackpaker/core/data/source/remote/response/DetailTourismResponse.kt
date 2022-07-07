@@ -62,7 +62,10 @@ data class Place(
 	val pictures: List<Any?>? = null,
 
 	@field:SerializedName("desc")
-	val desc: String? = null
+	val desc: String? = null,
+
+	@field:SerializedName("price")
+	val price: Int? = null
 )
 
 data class TagsItem(

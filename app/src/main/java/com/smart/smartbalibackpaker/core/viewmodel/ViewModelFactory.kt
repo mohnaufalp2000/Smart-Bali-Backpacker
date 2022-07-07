@@ -8,6 +8,7 @@ import com.smart.smartbalibackpaker.dashboard.PlaceViewModel
 import com.smart.smartbalibackpaker.core.data.TourismRepository
 import com.smart.smartbalibackpaker.core.di.Injection
 import com.smart.smartbalibackpaker.dashboard.FavoriteViewModel
+import com.smart.smartbalibackpaker.registration.RegistSecondFormViewModel
 
 class ViewModelFactory private constructor(private val tourismRepository: TourismRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -23,6 +24,9 @@ class ViewModelFactory private constructor(private val tourismRepository: Touris
             }
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 FavoriteViewModel(tourismRepository) as T
+            }
+            modelClass.isAssignableFrom(RegistSecondFormViewModel::class.java) -> {
+                RegistSecondFormViewModel(tourismRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

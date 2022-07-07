@@ -24,6 +24,7 @@ import com.smart.smartbalibackpaker.chat.GroupChatActivity
 import com.smart.smartbalibackpaker.chat.GroupChatActivity.Companion.GROUP_ID
 import com.smart.smartbalibackpaker.dashboard.DetailPlaceViewModel
 import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
+import com.smart.smartbalibackpaker.core.utils.Formatter
 import com.smart.smartbalibackpaker.databinding.ActivityDetailBinding
 import com.smart.smartbalibackpaker.core.viewmodel.ViewModelFactory
 import com.smart.smartbalibackpaker.core.vo.Status
@@ -75,8 +76,8 @@ class DetailActivity : AppCompatActivity() {
             state = !state
             detailPlaceViewModel.setFavorite(place, state)
             if(state){
-                Snackbar.make(it, "Succesfully add to favorite", Snackbar.LENGTH_LONG)
-                    .setAction("Close") {
+                Snackbar.make(it, "Berhasil ditambahkan ke favorit", Snackbar.LENGTH_LONG)
+                    .setAction("Tutup") {
                         // Responds to click on the action
                     }
                     .show()
@@ -87,8 +88,8 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Snackbar.make(it, "Succesfully remove from favorite", Snackbar.LENGTH_LONG)
-                    .setAction("Close") {
+                Snackbar.make(it, "Berhasil dihapus dari favorit", Snackbar.LENGTH_LONG)
+                    .setAction("Tutup") {
                         // Responds to click on the action
                     }
                     .show()
@@ -349,14 +350,14 @@ class DetailActivity : AppCompatActivity() {
 
     private fun populateContent(content: TourismDataEntity) {
         Glide.with(this)
-            .load("http://backpacker.igsindonesia.org/public/storage/pictures/thumbnail/${content.thumbnail}")
+            .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${content.thumbnail}")
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
             .apply(RequestOptions().transform(RoundedCorners(10)).override(90, 120))
             .into(binding.imgDetailPoster)
 
         Glide.with(this)
-            .load("http://backpacker.igsindonesia.org/public/storage/pictures/thumbnail/${content.thumbnail}")
+            .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${content.thumbnail}")
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
             .apply(RequestOptions().centerCrop())
@@ -365,8 +366,13 @@ class DetailActivity : AppCompatActivity() {
         binding.apply {
             tvDetailTitle.text = content.title
             tvDetailLocation.text = content.address
-            tvDetailPlaceDesc.text = content.desc
-            btnJoinGroupChat.text = "Join ${content.title} Group Chat"
+//            tvDetailPlaceDesc.text = content.desc
+            tvDetailTitleTicketPriceValue.text = content.price?.toDouble()?.let {
+                Formatter.rupiahFormatter(
+                    it
+                )
+            }
+            btnJoinGroupChat.text = "Bergabung ke Ruang Obrolan ${content.title}"
 
             supportActionBar?.title = content.title
         }
