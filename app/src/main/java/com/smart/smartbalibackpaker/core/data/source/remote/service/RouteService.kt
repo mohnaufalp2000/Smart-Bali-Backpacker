@@ -10,6 +10,7 @@ interface RouteService {
     fun requestRoute(
         @Query("origin") origin: String,
         @Query("destination") destination: String,
+        @Query("waypoints") waypoints: String,
         @Query("key") key: String
     ) : Call<ResponseRoute>
 }

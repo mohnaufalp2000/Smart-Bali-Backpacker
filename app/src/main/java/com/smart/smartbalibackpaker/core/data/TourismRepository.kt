@@ -1,44 +1,26 @@
 package com.smart.smartbalibackpaker.core.data
 
-import android.graphics.Color
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
-import com.google.maps.android.PolyUtil
-import com.smart.smartbalibackpaker.core.data.source.local.LocalDataSource
-import com.smart.smartbalibackpaker.core.data.source.local.entity.AccomDataEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.UploadResultEntity
+import com.smart.smartbalibackpaker.core.data.source.local.entity.*
 import com.smart.smartbalibackpaker.core.data.source.remote.ApiResponse
-import com.smart.smartbalibackpaker.core.data.source.remote.ConfigNetwork
 import com.smart.smartbalibackpaker.core.data.source.remote.RemoteDataSource
 import com.smart.smartbalibackpaker.core.data.source.remote.response.*
-import com.smart.smartbalibackpaker.core.model.ResponseRoute
 import com.smart.smartbalibackpaker.core.utils.AppExecutors
 import com.smart.smartbalibackpaker.core.utils.Coordinate
 import com.smart.smartbalibackpaker.core.utils.distance
 import com.smart.smartbalibackpaker.core.vo.Resource
-import com.smart.smartbalibackpaker.registration.ChoosePlaceActivity
-import com.smart.smartbalibackpaker.registration.RegistSecondFormActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TourismRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) :
-    TourismDataSource {
+    TourismDataSource, GuideDataSource, RecordGuideDataSource {
 
 //    private fun actionGetRates(name: String, keyword: String, location: String, key: String) {
 //        ConfigNetwork
@@ -356,14 +338,6 @@ class TourismRepository private constructor(
             return localDataSource.deletePlace(id)
     }
 
-    override fun setPlaceFavorite(place: TourismDataEntity, state: Boolean) {
-        appExecutors.diskIO().execute { localDataSource.setPlaceFavorite(place, state) }
-    }
-
-    override fun getPlacesFavorite(): LiveData<List<TourismDataEntity>> {
-        return localDataSource.getPlacesFavorite()
-    }
-
     override fun uploadRecord(email: String?,
                               nama: String?,
                               noHp: String?,
@@ -473,6 +447,98 @@ class TourismRepository private constructor(
 //            }
 //        }.asLiveData()
 //    }
+
+    override fun setPlaceFavorite(place: TourismDataEntity, state: Boolean) {
+        appExecutors.diskIO().execute { localDataSource.setPlaceFavorite(place, state) }
+    }
+
+    override fun getPlacesFavorite(): LiveData<List<TourismDataEntity>> {
+        return localDataSource.getPlacesFavorite()
+    }
+
+    override fun insertNode(guide: GuideMapsEntity) {
+        appExecutors.diskIO().execute { localDataSource.insertNode(guide) }
+    }
+
+    override fun getNodes(): LiveData<List<GuideMapsEntity>> {
+        return localDataSource.getNodes()
+    }
+
+    override fun deleteNode() {
+        appExecutors.diskIO().execute { localDataSource.deleteNode() }
+    }
+
+    override fun deleteNodes() {
+        appExecutors.diskIO().execute { localDataSource.deleteNodes() }
+    }
+
+    override fun getAllRecordGuide(backpackerId : String): LiveData<Resource<RecordGuideEntity>> {
+        return object : NetworkBoundResource<RecordGuideEntity, DetailGuideResponse>(appExecutors){
+            override fun loadFromDB(): LiveData<RecordGuideEntity> =
+                localDataSource.getAllRecordGuide(backpackerId)
+
+            override fun shouldFetch(data: RecordGuideEntity?): Boolean =
+//                data?.id == null
+                    true
+
+            override fun createCall(): LiveData<ApiResponse<DetailGuideResponse>> =
+                remoteDataSource.getRecordBackpacker(backpackerId)
+
+            override fun saveCallResult(data: DetailGuideResponse) {
+                val record = RecordGuideEntity(
+                    backpackerId = data.idBackpacker,
+                    noHp = data.noHp.toString(),
+                    vacationCount = data.jumlahPerjalanan,
+                )
+                val tmpListRecordVacation = ArrayList<RecordVacationListEntity>()
+                val tmpListVacationCount = ArrayList<VacationCountEntity>()
+                data.listPerjalanan?.forEachIndexed { index, _ ->
+                    val recordVacation = RecordVacationListEntity(
+                        id = UUID.randomUUID().toString(),
+                        idBackpacker = backpackerId,
+                        tglPerjalanan = data.listPerjalanan[index]?.tglPerjalanan,
+                        idTempatWisata = data.listPerjalanan[index]?.idTempatWisata?.toString(),
+                        idPerjalanan = data.listPerjalanan[index]?.idPerjalanan,
+                        idAkomodasi = data.listPerjalanan[index]?.idAkomodasi.toString(),
+                        tglPulang = data.listPerjalanan[index]?.tglPulang
+                    )
+                    Log.d("listrecvac", recordVacation.toString())
+                    tmpListRecordVacation.add(recordVacation)
+                    Log.d("listrecvacrec", tmpListRecordVacation.toString())
+
+                    data.listPerjalanan[index]?.idTempatWisata?.forEachIndexed { indexList, _ ->
+                        val vacationCount = VacationCountEntity(
+                            id = UUID.randomUUID().toString(),
+                            idPerjalanan = data.listPerjalanan[index]?.idPerjalanan,
+                            idTempatWisata = data.listPerjalanan[index]?.idTempatWisata?.get(indexList)
+                        )
+                        tmpListVacationCount.add(vacationCount)
+                    }
+                }
+
+                Log.d("listrecvacrec2", tmpListRecordVacation.toString())
+                if(localDataSource.getRecordVacation(backpackerId).value?.size != 0){
+                    localDataSource.deleteRecordVacation(backpackerId)
+                    localDataSource.deleteVacationCount()
+                    localDataSource.insertRecordVacation(tmpListRecordVacation)
+                    localDataSource.insertRecordGuide(record)
+                    localDataSource.insertVacationCount(tmpListVacationCount)
+                } else {
+                    localDataSource.insertRecordVacation(tmpListRecordVacation)
+                    localDataSource.insertRecordGuide(record)
+                    localDataSource.insertVacationCount(tmpListVacationCount)
+                }
+            }
+        }.asLiveData()
+    }
+
+    override fun getRecordVacation(backpackerId: String): LiveData<List<RecordVacationListEntity>> {
+        return localDataSource.getRecordVacation(backpackerId)
+    }
+
+    override fun getVacationRecordCount(perjalananId: Int): LiveData<List<VacationCountEntity>> {
+        return localDataSource.getVacationCount(perjalananId)
+    }
 
     companion object {
         @Volatile

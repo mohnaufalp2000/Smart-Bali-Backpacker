@@ -20,6 +20,8 @@ class RemoteDataSource {
                     val body = response.body()?.data
                     listPlaces.postValue(ApiResponse.success(body as List<DataItem>))
 //                    EspressoIdlingResource.decrement()
+                    Log.d("responseplace1", body.toString())
+
                 }
             }
 
@@ -27,6 +29,7 @@ class RemoteDataSource {
                 Log.d("Response", "On Failure")
             }
         })
+        Log.d("responseplace2", listPlaces.value?.body?.toString() ?: "")
         return listPlaces
     }
 
@@ -110,6 +113,29 @@ class RemoteDataSource {
             }
         })
         return listDetails
+    }
+
+    fun getRecordBackpacker(backpackerId: String): LiveData<ApiResponse<DetailGuideResponse>>{
+        val mutableRecord = MutableLiveData<ApiResponse<DetailGuideResponse>>()
+
+        ConfigNetwork.getRecordNetwork().getRecordGuide(backpackerId).enqueue(object : Callback<DetailGuideResponse>{
+            override fun onResponse(
+                call: Call<DetailGuideResponse>,
+                response: Response<DetailGuideResponse>
+            ) {
+                if(response.isSuccessful){
+                    val body = response.body()
+                    mutableRecord.postValue(ApiResponse.success(body as DetailGuideResponse))
+                    Log.d("responseguide", body.listPerjalanan?.toString() ?: " ")
+
+                }
+            }
+
+            override fun onFailure(call: Call<DetailGuideResponse>, t: Throwable) {
+            }
+        })
+
+        return mutableRecord
     }
 
     fun getAccom(): LiveData<ApiResponse<List<DataItemAllAccom>>> {

@@ -30,6 +30,15 @@
             android:name=".registration.ChoosePlaceActivity"
             android:exported="true" />
         <activity
+            android:name=".guide.ListVacationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".guide.TimerGuideActivity"
+            android:exported="true" />
+        <activity
+            android:name=".guide.DetailGuideActivity"
+            android:exported="true" />
+        <activity
             android:name=".FavoriteActivity"
             android:exported="true" />
         <activity

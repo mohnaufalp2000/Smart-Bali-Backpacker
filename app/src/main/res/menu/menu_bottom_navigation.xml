@@ -7,11 +7,17 @@
         android:icon="@drawable/ic_popular"
         android:title="@string/dashboard"/>
 
-    <item
-        android:id="@+id/navigation_guide"
-        android:enabled="true"
-        android:icon="@drawable/guide"
-        android:title="@string/guide"/>
+<!--    <item-->
+<!--        android:id="@+id/navigation_guide"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/guide"-->
+<!--        android:title="@string/guide"/>-->
+
+        <item
+            android:id="@+id/navigation_guide_tour"
+            android:enabled="true"
+            android:icon="@drawable/guide"
+            android:title="@string/guide"/>
 
     <item
         android:enabled="false"

@@ -1,8 +1,6 @@
 package com.smart.smartbalibackpaker.core.data.source.remote
 
-import com.smart.smartbalibackpaker.core.data.source.remote.service.PlaceService
-import com.smart.smartbalibackpaker.core.data.source.remote.service.RouteService
-import com.smart.smartbalibackpaker.core.data.source.remote.service.TourismService
+import com.smart.smartbalibackpaker.core.data.source.remote.service.*
 import com.smart.smartbalibackpaker.core.utils.Constant.GOOGLE_MAPS_PLACE_URL
 import com.smart.smartbalibackpaker.core.utils.Constant.GOOGLE_MAPS_URL
 import com.smart.smartbalibackpaker.core.utils.Constant.TOURISM_URL
@@ -36,6 +34,24 @@ class ConfigNetwork {
                 .build()
 
             return retrofit.create(PlaceService::class.java)
+        }
+
+        fun getTrafficJamNetwork(): TrafficJamService {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://maps.googleapis.com/maps/api/distancematrix/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            return retrofit.create(TrafficJamService::class.java)
+        }
+
+        fun getRecordNetwork(): DetailGuideService {
+            val retrofit = Retrofit.Builder()
+                .baseUrl(TOURISM_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            return retrofit.create(DetailGuideService::class.java)
         }
     }
 }

@@ -4,19 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.smart.smartbalibackpaker.core.data.source.local.entity.AccomDataEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.UploadResultEntity
+import androidx.room.TypeConverters
+import com.smart.smartbalibackpaker.core.data.source.local.entity.*
 
 @Database(
-    entities = [TourismDataEntity::class, UploadResultEntity::class, AccomDataEntity::class],
+    entities = [TourismDataEntity::class, GuideMapsEntity::class, UploadResultEntity::class, AccomDataEntity::class, RecordGuideEntity::class, RecordVacationListEntity::class, VacationCountEntity::class],
     version = 2,
     exportSchema = false
 )
+//@TypeConverters(Converter::class)
 abstract class TourismDatabase : RoomDatabase() {
     abstract fun tourismDao(): TourismDao
+    abstract fun guideDao(): GuideDao
     abstract fun uploadResultDao(): UploadResultDao
     abstract fun accomDataDao(): AccomDataDao
+    abstract fun recordGuideDao(): RecordGuideDao
+    abstract fun recordVacationDao(): RecordVacationDao
+    abstract fun vacationCountDao(): VacationCountDao
 
     companion object {
         @Volatile
