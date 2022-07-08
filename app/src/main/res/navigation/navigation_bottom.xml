@@ -23,14 +23,13 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_setting" />
     <fragment
-        android:id="@+id/navigation_guide"
-        android:name="com.smart.smartbalibackpaker.GuideFragment"
-        android:label="fragment_guide"
-        tools:layout="@layout/fragment_guide" />
-    <fragment
         android:id="@+id/navigation_chat"
         android:name="com.smart.smartbalibackpaker.chat.StreamChatFragment"
         android:label="fragment_stream_chat"
         tools:layout="@layout/fragment_stream_chat" />
+    <fragment
+        android:id="@+id/navigation_guide_tour"
+        android:name="com.smart.smartbalibackpaker.guide.GuideTourFragment"
+        android:label="fragment_guide_tour" />
 
 </navigation>

@@ -1,18 +1,18 @@
-package com.smart.smartbalibackpaker.core.data.source.local
+package com.smart.smartbalibackpaker.core.data
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import com.smart.smartbalibackpaker.core.data.source.local.entity.AccomDataEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.TourismDataEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.UploadResultEntity
-import com.smart.smartbalibackpaker.core.data.source.local.room.AccomDataDao
-import com.smart.smartbalibackpaker.core.data.source.local.room.TourismDao
-import com.smart.smartbalibackpaker.core.data.source.local.room.UploadResultDao
+import com.smart.smartbalibackpaker.core.data.source.local.entity.*
+import com.smart.smartbalibackpaker.core.data.source.local.room.*
 
 class LocalDataSource private constructor(
     private val movieDao: TourismDao,
+    private val guideDao: GuideDao,
+    private val accomDataDao: AccomDataDao,
     private val uploadResultDao: UploadResultDao,
-    private val accomDataDao: AccomDataDao
+    private val recordGuideDao: RecordGuideDao,
+    private val recordVacationDao: RecordVacationDao,
+    private val vacationCountDao: VacationCountDao
     ) {
 
     fun insertPlace(place: List<TourismDataEntity>) {
@@ -73,10 +73,54 @@ class LocalDataSource private constructor(
     fun getDetailAccom(accomId: Int) =
         accomDataDao.getDetailAccom(accomId)
 
+    fun insertNode(guide: GuideMapsEntity){
+        guideDao.insertNode(guide)
+    }
+
+    fun getNodes(): LiveData<List<GuideMapsEntity>> =
+        guideDao.getNodes()
+
+    fun deleteNode(){
+        guideDao.deleteNode()
+    }
+
+    fun deleteNodes(){
+        guideDao.deleteNodes()
+    }
+
+    fun insertRecordGuide(record: RecordGuideEntity) {
+        recordGuideDao.insertRecordGuide(record)
+    }
+
+    fun getAllRecordGuide(backpackerId: String) : LiveData<RecordGuideEntity> =
+        recordGuideDao.getAllRecordGuide(backpackerId)
+
+    fun insertRecordVacation(record : List<RecordVacationListEntity>){
+        recordVacationDao.insertVacation(record)
+    }
+
+    fun deleteRecordVacation(backpackerId: String){
+        recordVacationDao.deleteVacation(backpackerId)
+    }
+
+    fun getRecordVacation(backpackerId: String) : LiveData<List<RecordVacationListEntity>> =
+        recordVacationDao.getVacation(backpackerId)
+
+    fun insertVacationCount(count: List<VacationCountEntity>){
+        vacationCountDao.insertVacatonCount(count)
+    }
+
+    fun deleteVacationCount(){
+        vacationCountDao.deleteVacationCount()
+    }
+
+    fun getVacationCount(idPerjalanan: Int) : LiveData<List<VacationCountEntity>> =
+        vacationCountDao.getVacationCount(idPerjalanan)
+
     companion object {
         private var INSTANCE: LocalDataSource? = null
 
-        fun getInstance(tourismDao: TourismDao, uploadResultDao: UploadResultDao, accomDataDao: AccomDataDao): LocalDataSource =
-            INSTANCE ?: LocalDataSource(tourismDao, uploadResultDao, accomDataDao)
+        fun getInstance(tourismDao: TourismDao, guideDao: GuideDao, accomDataDao: AccomDataDao, uploadResultDao: UploadResultDao, recordGuideDao: RecordGuideDao, recordVacationDao: RecordVacationDao, vacationCountDao: VacationCountDao): LocalDataSource =
+            INSTANCE ?: LocalDataSource(tourismDao, guideDao, accomDataDao, uploadResultDao, recordGuideDao, recordVacationDao, vacationCountDao)
     }
 }

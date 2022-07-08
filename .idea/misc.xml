@@ -43,6 +43,17 @@
         <entry key="..\:/PROJECT SMART-BALI BACKPACKER/Mobile Apps/Smart-Bali-Backpacker/app/src/main/res/layout/activity_regist_first_form.xml" value="0.264" />
         <entry key="..\:/PROJECT SMART-BALI BACKPACKER/Mobile Apps/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_hotel_villa.xml" value="0.1" />
         <entry key="..\:/PROJECT SMART-BALI BACKPACKER/Mobile Apps/Smart-Bali-Backpacker/app/src/main/res/layout/item_grid_place.xml" value="0.1671195652173913" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_bottom_current_vacation.xml" value="0.1085" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.1085" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.1085" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/activity_detail_guide.xml" value="0.1308876811594203" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/activity_list_vacation.xml" value="0.1308876811594203" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/activity_timer_guide.xml" value="0.1308876811594203" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_guide.xml" value="0.1308876811594203" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/fragment_guide_tour.xml" value="0.1" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/layout/item_vacation_list.xml" value="0.16666666666666666" />
+        <entry key="..\:/ProjectAndroidStudio/Done/Smart-Bali-Backpacker/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_btn_green.xml" value="0.16666666666666666" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_chat_sender.xml" value="0.17314814814814813" />
         <entry key="..\:/ProjectAndroidStudio/Smart-Bali-Backpacker/app/src/main/res/drawable/bg_main.xml" value="0.15" />
@@ -91,7 +102,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

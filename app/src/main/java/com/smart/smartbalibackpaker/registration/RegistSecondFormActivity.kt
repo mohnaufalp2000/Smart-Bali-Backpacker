@@ -78,6 +78,7 @@ class RegistSecondFormActivity : AppCompatActivity() {
         if (name.toString() != "PLACE_DATA" && name.toString() != "null") {
             binding.etRegistFillPlace.setText(name)
 //            binding.etBudgetLeft.setText(budget)
+            Log.d("PLACENAME", name.toString())
 
             Log.d("BUDGETSISA", budget.toString())
             // Data Splitting to Array (Retrieve last index for Next Lat and Long)

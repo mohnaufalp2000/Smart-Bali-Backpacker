@@ -8,6 +8,8 @@ import com.smart.smartbalibackpaker.dashboard.PlaceViewModel
 import com.smart.smartbalibackpaker.core.data.TourismRepository
 import com.smart.smartbalibackpaker.core.di.Injection
 import com.smart.smartbalibackpaker.dashboard.FavoriteViewModel
+import com.smart.smartbalibackpaker.guide.DetailGuideViewModel
+import com.smart.smartbalibackpaker.guide.RecordGuideViewModel
 import com.smart.smartbalibackpaker.registration.RegistSecondFormViewModel
 
 class ViewModelFactory private constructor(private val tourismRepository: TourismRepository) :
@@ -27,6 +29,12 @@ class ViewModelFactory private constructor(private val tourismRepository: Touris
             }
             modelClass.isAssignableFrom(RegistSecondFormViewModel::class.java) -> {
                 RegistSecondFormViewModel(tourismRepository) as T
+            }
+            modelClass.isAssignableFrom(DetailGuideViewModel::class.java) -> {
+                DetailGuideViewModel(tourismRepository) as T
+            }
+            modelClass.isAssignableFrom(RecordGuideViewModel::class.java) -> {
+                RecordGuideViewModel(tourismRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
