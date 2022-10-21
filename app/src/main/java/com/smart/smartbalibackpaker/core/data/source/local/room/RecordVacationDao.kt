@@ -18,4 +18,7 @@ interface RecordVacationDao {
 
     @Query("SELECT * FROM table_vacation_list WHERE id_backpacker = :backpackerId")
     fun getVacation(backpackerId: String): LiveData<List<RecordVacationListEntity>>
+
+    @Query("SELECT * FROM table_vacation_list WHERE id_perjalanan = :idPerjalanan")
+    fun getDetailVacation(idPerjalanan: Int) : LiveData<RecordVacationListEntity>
 }

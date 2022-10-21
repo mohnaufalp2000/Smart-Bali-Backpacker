@@ -277,7 +277,7 @@ class ChoosePlaceActivity : AppCompatActivity(), OnMapReadyCallback{
         const val ACCOM_NAME = "ACCOM_NAME"
 
         const val PLACE_DATA_EXIST = "EXIST_DATA"
-        const val PLACE_NAME_EXIST = "EXIST_DATA"
+        const val PLACE_NAME_EXIST = "EXIST_NAME"
 
         const val NEXT_NODE_LAT = "-8.7383124"
         const val NEXT_NODE_LONG = "115.2101971"

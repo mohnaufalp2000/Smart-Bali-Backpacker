@@ -83,4 +83,10 @@
     <string name="tempat_favorit">Favorite Places</string>
     <string name="remove_from_favorite">Remove From Favorite</string>
     <string name="favorit_kosong">Empty Favorite</string>
+    <string name="attention">Attention</string>
+    <string name="arrived">Have you arrived at the destination?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="trafficjam">Oops! Traffic jam detected!</string>
+    <string name="trafficjamdesc">Roads to tourist attractions are observed to be jammed. Do you want to go to another tourist destination?</string>
 </resources>

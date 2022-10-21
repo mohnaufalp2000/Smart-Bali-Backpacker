@@ -12,6 +12,8 @@ data class GuideMapsEntity(
     @PrimaryKey()
     @NonNull
     var id: Int,
+    var idPlace: Int= 0,
+    var namePlace: String = "",
     var placeNumber : Int = 0,
-    var placeLatLng: String,
+    var placeLatLng: String = "",
 )

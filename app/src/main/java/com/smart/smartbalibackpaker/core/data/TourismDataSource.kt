@@ -15,6 +15,8 @@ interface TourismDataSource {
 
     fun getDetailTourism(placeId: Int): LiveData<Resource<TourismDataEntity>>
 
+    fun getDetailGuideTourism(placeId: Int): LiveData<TourismDataEntity>
+
     fun deleteTourism(id: Int)
 
     fun setPlaceFavorite(place: TourismDataEntity, state: Boolean)
@@ -32,6 +34,8 @@ interface TourismDataSource {
                      tmpWisata: String?): LiveData<Resource<UploadResultEntity>>
 
     fun getAccom(): LiveData<Resource<PagedList<AccomDataEntity>>>
+
+    fun getDetailAccom(id: Int) : LiveData<AccomDataEntity>
 
 //    fun getDetailAccom(accomId: Int): LiveData<Resource<AccomDataEntity>>
 }

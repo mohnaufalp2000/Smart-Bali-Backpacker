@@ -40,7 +40,7 @@ class ChooseAccomAdapter: PagedListAdapter<AccomDataEntity, ChooseAccomAdapter.L
             tvPlaceDistance.text = accom.rent_price?.let { Formatter.rupiahFormatter(it.toDouble()) }
 
             Glide.with(itemView.context)
-                .load("https://smart-balibackpacker.com/storage/public/pictures/galleries/${accom.pictures}")
+                .load("https://balibackpacker.co.id/storage/public/pictures/galleries/${accom.pictures}")
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .apply(RequestOptions().transform(RoundedCorners(10)).override(90, 120))

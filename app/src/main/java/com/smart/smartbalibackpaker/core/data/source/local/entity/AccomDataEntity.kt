@@ -15,6 +15,9 @@ data class AccomDataEntity(
     @ColumnInfo(name = "accom_id")
     var id: Int? = null,
 
+    @ColumnInfo(name = "id_car")
+    var id_car : Int? = null,
+
     @ColumnInfo(name = "no_car")
     var no_car: String? = null,
 

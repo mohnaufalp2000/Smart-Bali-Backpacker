@@ -9,6 +9,7 @@ import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.auth.LoginActivity
 import com.smart.smartbalibackpaker.core.preferences.Preferences
 import com.smart.smartbalibackpaker.databinding.ActivityOnboardingBinding
+import com.smart.smartbalibackpaker.guide.DetailGuideActivity
 
 class OnboardingActivity : AppCompatActivity() {
 

@@ -12,7 +12,6 @@ class LocalDataSource private constructor(
     private val uploadResultDao: UploadResultDao,
     private val recordGuideDao: RecordGuideDao,
     private val recordVacationDao: RecordVacationDao,
-    private val vacationCountDao: VacationCountDao
     ) {
 
     fun insertPlace(place: List<TourismDataEntity>) {
@@ -106,21 +105,13 @@ class LocalDataSource private constructor(
     fun getRecordVacation(backpackerId: String) : LiveData<List<RecordVacationListEntity>> =
         recordVacationDao.getVacation(backpackerId)
 
-    fun insertVacationCount(count: List<VacationCountEntity>){
-        vacationCountDao.insertVacatonCount(count)
-    }
-
-    fun deleteVacationCount(){
-        vacationCountDao.deleteVacationCount()
-    }
-
-    fun getVacationCount(idPerjalanan: Int) : LiveData<List<VacationCountEntity>> =
-        vacationCountDao.getVacationCount(idPerjalanan)
+    fun getDetailRecordVacation(idPerjalanan: Int): LiveData<RecordVacationListEntity> =
+        recordVacationDao.getDetailVacation(idPerjalanan)
 
     companion object {
         private var INSTANCE: LocalDataSource? = null
 
-        fun getInstance(tourismDao: TourismDao, guideDao: GuideDao, accomDataDao: AccomDataDao, uploadResultDao: UploadResultDao, recordGuideDao: RecordGuideDao, recordVacationDao: RecordVacationDao, vacationCountDao: VacationCountDao): LocalDataSource =
-            INSTANCE ?: LocalDataSource(tourismDao, guideDao, accomDataDao, uploadResultDao, recordGuideDao, recordVacationDao, vacationCountDao)
+        fun getInstance(tourismDao: TourismDao, guideDao: GuideDao, accomDataDao: AccomDataDao, uploadResultDao: UploadResultDao, recordGuideDao: RecordGuideDao, recordVacationDao: RecordVacationDao): LocalDataSource =
+            INSTANCE ?: LocalDataSource(tourismDao, guideDao, accomDataDao, uploadResultDao, recordGuideDao, recordVacationDao)
     }
 }

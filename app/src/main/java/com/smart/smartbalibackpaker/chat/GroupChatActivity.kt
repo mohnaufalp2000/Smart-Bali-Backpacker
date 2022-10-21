@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -16,7 +15,7 @@ import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.chat.GroupInfoActivity.Companion.GROUP_ID_INFO
 import com.smart.smartbalibackpaker.databinding.ActivityGroupChatBinding
 import com.smart.smartbalibackpaker.core.model.groupchat.GroupChatAdapter
-import com.smart.smartbalibackpaker.core.model.groupchat.ModelGroupChat
+import com.smart.smartbalibackpaker.core.model.groupchat.MessageData
 
 class GroupChatActivity : AppCompatActivity() {
 
@@ -86,13 +85,13 @@ class GroupChatActivity : AppCompatActivity() {
         val ref = db.getReference("groups")
         ref.child(groupId ?: "").child("messages").addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val groupChatList = ArrayList<ModelGroupChat>()
+                val groupChatList = ArrayList<MessageData>()
                 groupChatList.clear()
 
                 for(ds in snapshot.children){
-                    val model = ds.getValue(ModelGroupChat::class.java)
+                    val model = ds.getValue(MessageData::class.java)
                     if (model != null) {
-                        val groupChat = ModelGroupChat(
+                        val groupChat = MessageData(
                             model.message,
                             model.sender,
                             model.time,

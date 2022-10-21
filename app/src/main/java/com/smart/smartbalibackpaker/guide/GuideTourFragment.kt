@@ -7,20 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
-import com.smart.smartbalibackpaker.R
 import com.smart.smartbalibackpaker.core.data.source.local.entity.RecordGuideEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.RecordVacationListEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.VacationCountEntity
-import com.smart.smartbalibackpaker.core.data.source.remote.response.ListPerjalananItem
 import com.smart.smartbalibackpaker.core.viewmodel.ViewModelFactory
 import com.smart.smartbalibackpaker.core.vo.Status
-import com.smart.smartbalibackpaker.databinding.FragmentGuideBinding
 import com.smart.smartbalibackpaker.databinding.FragmentGuideTourBinding
 
 
@@ -33,7 +26,6 @@ class GuideTourFragment : Fragment() {
     private lateinit var outsideAdapter : RecordGuideAdapter
     private var user: FirebaseUser? = null
     private var myUid: String? = null
-    private val listIdPerjalanan = ArrayList<VacationCountEntity>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +41,10 @@ class GuideTourFragment : Fragment() {
 
         firebaseAuth()
         populateData()
+
+//        binding?.btnDetailGuide?.setOnClickListener {
+//            startActivity(Intent(context, DetailGuideActivity::class.java))
+//        }
     }
 
     private fun firebaseAuth() {
@@ -60,32 +56,64 @@ class GuideTourFragment : Fragment() {
         recordGuideViewModel.getAllRecordGuide(myUid ?: "").observe(viewLifecycleOwner){
             if(it != null){
                 when(it.status){
-                    Status.LOADING -> {}
+                    Status.LOADING -> {
+                        showProgressBarTouristPlace(true)
+                    }
                     Status.SUCCESS -> {
-                        Log.d("idguide", myUid ?: "")
                         val record = it.data
+                        showProgressBarTouristPlace(false)
+                        Log.d("idguide", myUid ?: "")
 
                         recordGuideViewModel.getRecordVacation(myUid ?: "").observe(viewLifecycleOwner){ listVac ->
-
                             Log.d("hahaha1", listVac.toString())
-//                            listVac.forEachIndexed { index, _ ->
-//                                recordGuideViewModel.getVacationCount(listVac[index].idPerjalanan ?: 0).observe(viewLifecycleOwner){fixList ->
-//                                        Log.d("hahaha2", listVac.toString())
-//                                        Log.d("hahaha3", fixList.toString())
-//                                        fixList.forEachIndexed { fixIndex, _ ->
-//                                        if(fixList[fixIndex].idPerjalanan == listVac[index].idPerjalanan){
-//                                            listIdPerjalanan.add(fixList[index])
+//                        showProgressBarTouristPlace(false)
+//                            recordGuideViewModel.getAccom().observe(viewLifecycleOwner){ accom ->
+//                                if (accom != null){
+//                                    when(accom.status){
+//                                        Status.LOADING -> {}
+//                                        Status.SUCCESS -> {
+////                                            showProgressBarTouristPlace(false)
+//                                            listVac.forEachIndexed{index, _ ->
+//                                                accom.data?.forEachIndexed { carIndex, _ ->
+//                                                    val idAccom = listVac[index].idAkomodasi?.split(".")?.toList()
+//                                                    if((idAccom?.get(0)?.toInt()
+//                                                            ?: 0) == accom.data[carIndex]?.id_car
+//                                                    ){
+//                                                        recordGuideViewModel.getDetailAccom(accom.data[carIndex]?.id_car ?: 0)
+//                                                            .observe(viewLifecycleOwner){car ->
+////                                                                showProgressBarTouristPlace(false)
+//                                                                outsideAdapter = RecordGuideAdapter(record ?: RecordGuideEntity() , listVac, car)
+//                                                                showRecyclerView(outsideAdapter)
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
 //                                        }
-//
-//                                        }
+//                                        Status.ERROR -> {}
+//                                    }
 //                                }
 //                            }
-                            outsideAdapter = RecordGuideAdapter(record ?: RecordGuideEntity() , listVac, listIdPerjalanan)
+                            showProgressBarTouristPlace(false)
+                            outsideAdapter = RecordGuideAdapter(record ?: RecordGuideEntity() , listVac)
                             showRecyclerView(outsideAdapter)
                         }
                     }
-                    Status.ERROR -> {}
+                    Status.ERROR -> {
+//                        showProgressBarTouristPlace(false)
+                    }
                 }
+            }
+        }
+    }
+
+    private fun showProgressBarTouristPlace(status: Boolean) {
+        binding?.apply {
+            if (status) {
+                pbGuideTour.visibility = View.VISIBLE
+                rvVacationList.visibility = View.GONE
+            } else {
+                pbGuideTour.visibility = View.GONE
+                rvVacationList.visibility = View.VISIBLE
             }
         }
     }

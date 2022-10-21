@@ -14,7 +14,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class GroupChatAdapter(
-    val context: Context, private val listChat: ArrayList<ModelGroupChat>
+    val context: Context, private val listChat: ArrayList<MessageData>
     ) : RecyclerView.Adapter<GroupChatAdapter.ListViewHolder>() {
 
     companion object{
@@ -54,7 +54,7 @@ class GroupChatAdapter(
         holder.tvTime.text = dateTime
     }
 
-    private fun setUsername(groupChat: ModelGroupChat, holder: ListViewHolder) {
+    private fun setUsername(groupChat: MessageData, holder: ListViewHolder) {
         val ref = FirebaseDatabase.getInstance().getReference("users")
         ref.orderByChild("id").equalTo(groupChat.sender).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -11,7 +11,7 @@ object Injection {
     fun provideRepository(context: Context): TourismRepository {
         val database = TourismDatabase.getInstance(context)
         val remoteDataSource = RemoteDataSource.getInstance()
-        val localDataSource = LocalDataSource.getInstance(database.tourismDao(), database.guideDao(), database.accomDataDao(), database.uploadResultDao(), database.recordGuideDao(), database.recordVacationDao(), database.vacationCountDao())
+        val localDataSource = LocalDataSource.getInstance(database.tourismDao(), database.guideDao(), database.accomDataDao(), database.uploadResultDao(), database.recordGuideDao(), database.recordVacationDao())
         val appExecutors = AppExecutors()
         return TourismRepository.getInstance(remoteDataSource, localDataSource, appExecutors)
     }
