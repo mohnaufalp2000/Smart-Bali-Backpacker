@@ -1,53 +1,45 @@
 package com.smart.smartbalibackpaker.guide
 
-import android.util.Log
 import com.smart.smartbalibackpaker.core.data.source.local.entity.GuideMapsEntity
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 object FloydWarshall {
+    private const val INFINITE = 999999
     private var k = 0
     private val listPlace = ArrayList<GuideMapsEntity?>()
     private var list = ArrayList<Int?>()
     private val anestedLoopIndex = ArrayList<Int?>()
-//    private val tableNode = Array(listPlace.size+1){Array(2){""} }
 
     fun getDistance(valueList : ArrayList<Int?>, listPlace: ArrayList<GuideMapsEntity>, node: HashMap<Any, Int?>){
         k = listPlace.size
-        Log.d("ksize", k.toString())
         this.listPlace.clear()
         this.listPlace.addAll(listPlace)
-        Log.d("nodestring", node.toString())
-        Log.d("thislist", this.listPlace.toString())
 
-//      sort node
         val sortedNode : MutableMap<Any, Int?> = TreeMap(node)
-        Log.d("sortednode", sortedNode.toString())
 
-//      get node values
         list.clear()
         list = ArrayList(sortedNode.values)
-        Log.d("listlist", list.toString())
 
-//        if(k == (list.size - k) - ((list.size - k) - k)){
-//            createTable()
-//        }
-
-        if(k*3 == list.size){
-            createTable()
+        if (list.size == k){
+            list.forEachIndexed { index, _ ->
+                if (index == list.size - 1){
+                    createTable()
+                }
+            }
         }
+
     }
 
     private fun createTable() {
         val table = Array(k) { IntArray(k) }
         var indexTable = 0
 
-//      create table and insert distance value to table
         for(row in 0 until k){
             for (column in 0 until k){
                 if(row == column){
-                    table[row][column] = 9999
+                    table[row][column] = INFINITE
                 } else {
                     table[row][column] = list[indexTable]!!
                 }
@@ -62,18 +54,6 @@ object FloydWarshall {
             }
         }
 
-//      print table
-        for(column in table){
-            for(value in column){
-                print(value)
-                print(" ")
-            }
-            println("")
-        }
-        println("test")
-
-//      floyd-warshall
-        val anestedLoop = ArrayList<Int?>()
         anestedLoopIndex.add(1)
         val tableValues = ArrayList<Int>()
         val tableValuesSorted = ArrayList<Int>()
@@ -85,13 +65,12 @@ object FloydWarshall {
         while(idx < k) {
             tableValues.add(table[tableRow][tableColumn])
             tableColumn++
-            if (tableValues.size != 4) continue
+            if (tableValues.size != k) continue
             tableColumn = 0
             tableValuesSorted.addAll(tableValues)
 
-//          Bubble sort
-            for(i in 0 until tableValuesSorted.size-1){
-                for(j in 0 until tableValuesSorted.size-i-1){
+            for(i in 0 until tableValuesSorted.size - 1){
+                for(j in 0 until tableValuesSorted.size-i - 1){
                     if(tableValuesSorted[j] > tableValuesSorted[j+1]){
                         val tmp = tableValuesSorted[j]
                         tableValuesSorted[j] = tableValuesSorted[j+1]
@@ -99,39 +78,31 @@ object FloydWarshall {
                     }
                 }
             }
-            Log.d("tableValuesSorted", tableValuesSorted.toString())
 
             var minValue = 0
-            if(tableValuesSorted[0] < 9999){
+            if(tableValuesSorted[0] < INFINITE){
                 minValue = tableValuesSorted[0]
             } else {
-                minValue = tableValuesSorted.find { item -> item > 9999 } ?: 0
+                minValue = tableValuesSorted.find { item -> item > INFINITE } ?: 0
             }
 
-            Log.d("minvalue", minValue.toString())
-
-//          get index of min value
             val minValueIndex = tableValues.indexOf(minValue)
             anestedLoopIndex.add(minValueIndex+1)
 
             tableValuesSorted.clear()
             tableValues.clear()
 
-            Log.d("distancefloyd", anestedLoop.toString())
-            Log.d("distancefloydIndex", anestedLoopIndex.toString())
-
             for(column in 0 until k){
                 if (table[tableRow][column] == minValue) {
-                    table[tableRow][column] = 9999
+                    table[tableRow][column] = INFINITE
                     tableRow = column
                     columnIteration.add(column)
-                    Log.d("columnite", columnIteration.toString())
                     columnIteration.forEachIndexed { index,_ ->
                         if(index == 0){
-                            table[columnIteration[index]][0] = 9999
+                            table[columnIteration[index]][0] = INFINITE
                         } else {
-                            table[columnIteration[index]][0] = 9999
-                            table[columnIteration[index]][columnIteration[index-1]] = 9999
+                            table[columnIteration[index]][0] = INFINITE
+                            table[columnIteration[index]][columnIteration[index-1]] = INFINITE
                         }
                     }
                     tableColumn = 0
@@ -141,26 +112,26 @@ object FloydWarshall {
         }
 
         defineRoutes()
-
-//      print table
-        for(column in table){
-            for(value in column){
-                print(value)
-                print(" ")
-            }
-            println("")
-        }
     }
 
-    fun defineRoutes() : MutableList<GuideMapsEntity?>{
+    fun defineRoutes(): MutableList<GuideMapsEntity?> {
         val orderByIndex = listPlace.associateBy { it?.id }
         val sortedNode = mutableListOf<GuideMapsEntity?>()
-        anestedLoopIndex.forEachIndexed { index, value ->
-            if(index < k){
+        anestedLoopIndex.toSet().toList().forEachIndexed { index, value ->
+            if (index < k) {
                 sortedNode.add(orderByIndex[value])
             }
         }
-        Log.d("sortednodema", sortedNode.toString())
-        return sortedNode
+        return sortedNode.toSet().toMutableList()
     }
+
+    //      print table
+//    for(column in table){
+//        for(value in column){
+//            print(value)
+//            print(" ")
+//        }
+//        println("")
+//    }
+//    println("test")
 }

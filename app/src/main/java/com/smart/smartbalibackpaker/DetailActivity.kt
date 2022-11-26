@@ -350,14 +350,14 @@ class DetailActivity : AppCompatActivity() {
 
     private fun populateContent(content: TourismDataEntity) {
         Glide.with(this)
-            .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${content.thumbnail}")
+            .load("https://balibackpacker.co.id/storage/public/pictures/thumbnail/${content.thumbnail}")
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
             .apply(RequestOptions().transform(RoundedCorners(10)).override(90, 120))
             .into(binding.imgDetailPoster)
 
         Glide.with(this)
-            .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${content.thumbnail}")
+            .load("https://balibackpacker.co.id/storage/public/pictures/thumbnail/${content.thumbnail}")
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
             .apply(RequestOptions().centerCrop())

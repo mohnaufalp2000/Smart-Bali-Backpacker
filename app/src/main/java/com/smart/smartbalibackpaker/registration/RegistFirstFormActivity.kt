@@ -109,6 +109,10 @@ class RegistFirstFormActivity : AppCompatActivity() {
                 }
             })
         }
+
+        binding.icBack.setOnClickListener{
+            finish()
+        }
     }
 
 

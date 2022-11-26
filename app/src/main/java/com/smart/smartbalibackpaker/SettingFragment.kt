@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.smart.smartbalibackpaker.auth.LoginActivity
 import com.smart.smartbalibackpaker.core.preferences.PreferencesSettings
+import com.smart.smartbalibackpaker.core.viewmodel.ViewModelFactory
 import com.smart.smartbalibackpaker.databinding.FragmentSettingBinding
+import com.smart.smartbalibackpaker.guide.DetailGuideViewModel
 
 class SettingFragment : Fragment() {
 
@@ -22,6 +25,9 @@ class SettingFragment : Fragment() {
     private var userId: String? = null
     private var binding: FragmentSettingBinding? = null
     private lateinit var auth: FirebaseAuth
+    private val detailGuideViewModel by lazy { ViewModelProvider(this, ViewModelFactory.getInstance(requireContext())
+        ).get(DetailGuideViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +92,7 @@ class SettingFragment : Fragment() {
 
         binding?.txtLogOut?.setOnClickListener {
             auth.signOut()
+            detailGuideViewModel.deleteNodes()
             Intent(context, LoginActivity::class.java).also {
                 it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 activity?.startActivity(it)

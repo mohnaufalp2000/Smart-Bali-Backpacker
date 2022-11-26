@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.smart.smartbalibackpaker.core.data.source.local.entity.*
 
 @Database(
-    entities = [TourismDataEntity::class, GuideMapsEntity::class, UploadResultEntity::class, AccomDataEntity::class, RecordGuideEntity::class, RecordVacationListEntity::class, VacationCountEntity::class],
+    entities = [TourismDataEntity::class, GuideMapsEntity::class, UploadResultEntity::class, AccomDataEntity::class, RecordGuideEntity::class, RecordVacationListEntity::class],
     version = 2,
     exportSchema = false
 )
@@ -20,7 +20,6 @@ abstract class TourismDatabase : RoomDatabase() {
     abstract fun accomDataDao(): AccomDataDao
     abstract fun recordGuideDao(): RecordGuideDao
     abstract fun recordVacationDao(): RecordVacationDao
-    abstract fun vacationCountDao(): VacationCountDao
 
     companion object {
         @Volatile

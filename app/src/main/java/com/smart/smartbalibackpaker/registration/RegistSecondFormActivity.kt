@@ -152,6 +152,10 @@ class RegistSecondFormActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.icBack.setOnClickListener{
+            finish()
+        }
+
         binding.btnRegistPlace.setOnClickListener {
             val intent = Intent(this, ChoosePlaceActivity::class.java)
             intent.putExtra(ChoosePlaceActivity.EXTRA_EMAIL, email)

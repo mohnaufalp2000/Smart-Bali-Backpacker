@@ -305,10 +305,15 @@ class TourismRepository private constructor(
         }.asLiveData()
     }
 
+    override fun getDetailGuideTourism(placeId: Int): LiveData<TourismDataEntity> {
+        return localDataSource.getDetailPlace(placeId)
+    }
+
     override fun getDetailTourism(placeId: Int): LiveData<Resource<TourismDataEntity>> {
         return object : NetworkBoundResource<TourismDataEntity, Place>(appExecutors) {
-            override fun loadFromDB(): LiveData<TourismDataEntity> =
-                localDataSource.getDetailPlace(placeId)
+            override fun loadFromDB(): LiveData<TourismDataEntity> {
+                return localDataSource.getDetailPlace(placeId)
+            }
 
             override fun shouldFetch(data: TourismDataEntity?): Boolean =
                 data?.title.isNullOrEmpty()
@@ -405,6 +410,7 @@ class TourismRepository private constructor(
                 val placeList = ArrayList<AccomDataEntity>()
                 for (response in data) {
                     val movie = AccomDataEntity(
+                        id_car = response.id,
                         no_car = response.noCar,
                         name = response.name,
                         status = response.status,
@@ -419,7 +425,11 @@ class TourismRepository private constructor(
         }.asLiveData()
     }
 
-// WAITING FOR POJO JSON DETAIL ACCOM API
+    override fun getDetailAccom(id: Int): LiveData<AccomDataEntity> {
+        return localDataSource.getDetailAccom(id)
+    }
+
+    // WAITING FOR POJO JSON DETAIL ACCOM API
 //    override fun getDetailAccom(accomdId: Int): LiveData<Resource<AccomDataEntity>> {
 //        return object : NetworkBoundResource<AccomDataEntity, Place>(appExecutors) {
 //            override fun loadFromDB(): LiveData<AccomDataEntity> =
@@ -491,7 +501,6 @@ class TourismRepository private constructor(
                     vacationCount = data.jumlahPerjalanan,
                 )
                 val tmpListRecordVacation = ArrayList<RecordVacationListEntity>()
-                val tmpListVacationCount = ArrayList<VacationCountEntity>()
                 data.listPerjalanan?.forEachIndexed { index, _ ->
                     val recordVacation = RecordVacationListEntity(
                         id = UUID.randomUUID().toString(),
@@ -505,28 +514,16 @@ class TourismRepository private constructor(
                     Log.d("listrecvac", recordVacation.toString())
                     tmpListRecordVacation.add(recordVacation)
                     Log.d("listrecvacrec", tmpListRecordVacation.toString())
-
-                    data.listPerjalanan[index]?.idTempatWisata?.forEachIndexed { indexList, _ ->
-                        val vacationCount = VacationCountEntity(
-                            id = UUID.randomUUID().toString(),
-                            idPerjalanan = data.listPerjalanan[index]?.idPerjalanan,
-                            idTempatWisata = data.listPerjalanan[index]?.idTempatWisata?.get(indexList)
-                        )
-                        tmpListVacationCount.add(vacationCount)
-                    }
                 }
 
                 Log.d("listrecvacrec2", tmpListRecordVacation.toString())
                 if(localDataSource.getRecordVacation(backpackerId).value?.size != 0){
                     localDataSource.deleteRecordVacation(backpackerId)
-                    localDataSource.deleteVacationCount()
                     localDataSource.insertRecordVacation(tmpListRecordVacation)
                     localDataSource.insertRecordGuide(record)
-                    localDataSource.insertVacationCount(tmpListVacationCount)
                 } else {
                     localDataSource.insertRecordVacation(tmpListRecordVacation)
                     localDataSource.insertRecordGuide(record)
-                    localDataSource.insertVacationCount(tmpListVacationCount)
                 }
             }
         }.asLiveData()
@@ -536,8 +533,8 @@ class TourismRepository private constructor(
         return localDataSource.getRecordVacation(backpackerId)
     }
 
-    override fun getVacationRecordCount(perjalananId: Int): LiveData<List<VacationCountEntity>> {
-        return localDataSource.getVacationCount(perjalananId)
+    override fun getDetailRecordVacation(idPerjalanan: Int): LiveData<RecordVacationListEntity> {
+        return localDataSource.getDetailRecordVacation(idPerjalanan)
     }
 
     companion object {

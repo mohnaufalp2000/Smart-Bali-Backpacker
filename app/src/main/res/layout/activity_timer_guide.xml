@@ -39,10 +39,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16">
 
         <ImageView
+            android:id="@+id/img_timer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/kutabeach" />
+            android:src="@drawable/placeholder" />
 
     </androidx.cardview.widget.CardView>
 
@@ -52,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Kuta Beach"
+        android:text="Place"
         android:textColor="@color/txt_app"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,12 +77,27 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="14:00 WIB"
+        android:text="WIB"
         android:textColor="@color/txt_app"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_skip_vacation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text=""
+        android:textColor="@color/txt_app"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_skip_vacation"
+        app:layout_constraintEnd_toStartOf="@id/textView19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 

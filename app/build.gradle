@@ -102,4 +102,12 @@ dependencies {
     // Room Database
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "androidx.room:room-compiler:2.2.3"
+
+    // Coroutines
+    def coroutines_version = "1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+    // draw route
+//    implementation 'com.github.ar-android:DrawRouteMaps:1.0.0'
+
 }

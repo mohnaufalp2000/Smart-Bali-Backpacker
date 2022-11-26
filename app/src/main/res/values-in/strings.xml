@@ -84,4 +84,10 @@
     <string name="tempat_favorit">Tempat Favorit</string>
     <string name="remove_from_favorite">Hapus dari favorit</string>
     <string name="favorit_kosong">Favorit Kosong</string>
+    <string name="attention">Peringatan</string>
+    <string name="arrived">Apakah anda telah sampai pada tujuan tempat wisata?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="trafficjam">Oops! Terjadi Kemacetan</string>
+    <string name="trafficjamdesc">Jalan menuju tempat wisata terpantau macet. Apakah anda ingin menuju tujuan wisata lain?</string>
 </resources>

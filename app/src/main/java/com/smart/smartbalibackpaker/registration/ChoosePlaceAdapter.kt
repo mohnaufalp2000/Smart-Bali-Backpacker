@@ -92,7 +92,7 @@ class ChoosePlaceAdapter : PagedListAdapter<TourismDataEntity, ChoosePlaceAdapte
             tvTicketPrice.text = place.price?.toDouble()?.let { Formatter.rupiahFormatter(it) }
 
             Glide.with(itemView.context)
-                .load("https://smart-balibackpacker.com/storage/public/pictures/thumbnail/${place.thumbnail}")
+                .load("https://balibackpacker.co.id/storage/public/pictures/thumbnail/${place.thumbnail}")
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .apply(RequestOptions().transform(RoundedCorners(10)))

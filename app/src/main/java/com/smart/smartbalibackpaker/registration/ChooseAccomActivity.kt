@@ -160,7 +160,9 @@ class ChooseAccomActivity : AppCompatActivity() {
 
             })
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(MainActivity.EXTRA_CHECK, 1)
             startActivity(intent)
+            finishAffinity()
         }
     }
 

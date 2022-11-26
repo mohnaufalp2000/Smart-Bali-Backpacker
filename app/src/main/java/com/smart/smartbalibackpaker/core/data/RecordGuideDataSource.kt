@@ -3,7 +3,6 @@ package com.smart.smartbalibackpaker.core.data
 import androidx.lifecycle.LiveData
 import com.smart.smartbalibackpaker.core.data.source.local.entity.RecordGuideEntity
 import com.smart.smartbalibackpaker.core.data.source.local.entity.RecordVacationListEntity
-import com.smart.smartbalibackpaker.core.data.source.local.entity.VacationCountEntity
 import com.smart.smartbalibackpaker.core.vo.Resource
 
 interface RecordGuideDataSource {
@@ -12,5 +11,6 @@ interface RecordGuideDataSource {
 
     fun getRecordVacation(backpackerId : String) : LiveData<List<RecordVacationListEntity>>
 
-    fun getVacationRecordCount(perjalananId: Int) : LiveData<List<VacationCountEntity>>
+    fun getDetailRecordVacation(idPerjalanan: Int) : LiveData<RecordVacationListEntity>
+
 }
